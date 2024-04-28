@@ -272,6 +272,10 @@ func _process(delta):
 	$HealthBar.max_value = MAX_HEALTH
 	$HealthBar.value = health
 
+	# exp bar
+	$CanvasLayer/Control/ExpBar.max_value = base_exp + current_level * exp_level_ratio
+	$CanvasLayer/Control/ExpBar.value = current_exp
+
 	# canculte atk speed and cooldown
 	current_fireball_cooldown = base_fireball_cooldown * (1 - bonus_fireball_cooldown)
 	current_thunder_cooldown = base_thunder_cooldown * (1 - bonus_thunder_cooldown)
@@ -283,18 +287,18 @@ func _process(delta):
 
 	# show stats
 	var stats = ''
-	stats += 'level: ' + str(current_level) + '\n'
-	stats += 'exp: ' + str(current_exp) + '/' + str(base_exp + current_level * exp_level_ratio) + '\n'
-	stats += '\n'
-	stats += 'health: ' + str(health) + '\n'
-	stats += 'movement speed: ' + str(current_speed) + '\n'
-	stats += 'fireball cd: ' + str(current_fireball_cooldown) + '\n'
-	stats += 'fireball count: ' + str(fireball_count) + '\n'
-	stats += 'thunder cd: ' + str(current_thunder_cooldown) + '\n'
-	stats += 'thunder count: ' + str(thunder_count) + '\n'
-	stats += 'laser cd: ' + str(current_laser_cooldown) + '\n'
-	stats += 'laser count: ' + str(laser_count) + '\n'
-	stats += 'void cd: ' + str(current_void_cooldown) + '\n'
+	stats += 'Lv ' + str(current_level) + '\n'
+	#stats += 'exp: ' + str(current_exp) + '/' + str(base_exp + current_level * exp_level_ratio) + '\n'
+	#stats += '\n'
+	#stats += 'health: ' + str(health) + '\n'
+	#stats += 'movement speed: ' + str(current_speed) + '\n'
+	#stats += 'fireball cd: ' + str(current_fireball_cooldown) + '\n'
+	#stats += 'fireball count: ' + str(fireball_count) + '\n'
+	#stats += 'thunder cd: ' + str(current_thunder_cooldown) + '\n'
+	#stats += 'thunder count: ' + str(thunder_count) + '\n'
+	#stats += 'laser cd: ' + str(current_laser_cooldown) + '\n'
+	#stats += 'laser count: ' + str(laser_count) + '\n'
+	#stats += 'void cd: ' + str(current_void_cooldown) + '\n'
 
 	$CanvasLayer/Control/StatsLabel.text = stats
 
@@ -386,6 +390,8 @@ func heal(amount):
 
 func take_damage(amount):
 	health -= amount
+	if health <= 0:
+		get_tree().change_scene_to_file("res://Menu.tscn")
 
 # leveling functions
 func _get_upgrades():

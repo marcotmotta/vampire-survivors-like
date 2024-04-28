@@ -5,4 +5,4 @@ func set_stats():
 	health = 300
 	speed = 70
 	damage = 50
-	exp = 7
+	exp = 8

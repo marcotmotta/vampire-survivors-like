@@ -1,10 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkfrar03gr2rl"]
+[gd_scene load_steps=7 format=3 uid="uid://bkfrar03gr2rl"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ggkj8"]
 [ext_resource type="PackedScene" uid="uid://p5sgkf8e53l1" path="res://Player/Player.tscn" id="1_n0qx8"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_p2tkw"]
+a = Vector2(10, -100)
+b = Vector2(10, 1000)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_26vbt"]
+a = Vector2(-100, 10)
+b = Vector2(1200, 10)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sbyvy"]
+a = Vector2(1140, -100)
+b = Vector2(1140, 1000)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hrn26"]
+a = Vector2(-100, 640)
+b = Vector2(1200, 640)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ggkj8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_p2tkw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_26vbt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_sbyvy")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_hrn26")
 
 [node name="Player" parent="." instance=ExtResource("1_n0qx8")]
 position = Vector2(600, 317)
