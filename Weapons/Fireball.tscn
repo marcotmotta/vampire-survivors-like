@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://b05c4mqaionpj"]
+
+[ext_resource type="Script" path="res://Weapons/Fireball.gd" id="1_amywe"]
+[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_v21gc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j1ph8"]
+radius = 15.0
+
+[sub_resource type="Curve" id="Curve_8c67h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_dbosm"]
+offsets = PackedFloat32Array(0, 0.113333, 0.293333)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.933333, 0, 1, 1, 0.447059, 0, 1)
+
+[sub_resource type="Curve" id="Curve_p3dsk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qynd2"]
+offsets = PackedFloat32Array(0, 0.113333, 0.293333)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.447059, 0, 1, 1, 0, 0, 1)
+
+[node name="Fireball" type="Area2D"]
+script = ExtResource("1_amywe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 1, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_v21gc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j1ph8")
+
+[node name="ExpirationTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Particle" type="CPUParticles2D" parent="."]
+amount = 32
+lifetime = 0.2
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 1.0
+gravity = Vector2(0, 0)
+scale_amount_min = 15.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_8c67h")
+color_ramp = SubResource("Gradient_dbosm")
+
+[node name="Particle2" type="CPUParticles2D" parent="."]
+visible = false
+amount = 50
+lifetime = 0.2
+emission_shape = 1
+emission_sphere_radius = 15.0
+spread = 1.0
+gravity = Vector2(0, 0)
+scale_amount_min = 15.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_p3dsk")
+color_ramp = SubResource("Gradient_qynd2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ExpirationTimer" to="." method="_on_expiration_timer_timeout"]

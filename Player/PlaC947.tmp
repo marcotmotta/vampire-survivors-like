@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=3 uid="uid://p5sgkf8e53l1"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
+[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_apd22"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45sbc"]
+size = Vector2(50, 50)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_brsg7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_apd22")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_45sbc")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 30.0
+offset_right = 35.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+show_percentage = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatsLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 191.0
+offset_right = 418.0
+offset_bottom = 575.0
+text = "atk speed:
+projectile count:"
+
+[node name="UpgradeList" type="VBoxContainer" parent="CanvasLayer/Control"]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -50.5
+offset_right = 78.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button0" type="Button" parent="CanvasLayer/Control/UpgradeList"]
+layout_mode = 2
+
+[node name="Button1" type="Button" parent="CanvasLayer/Control/UpgradeList"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control/UpgradeList"]
+layout_mode = 2
+
+[node name="FireballTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ThunderTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LaserTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button0" to="." method="_on_button_0_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="timeout" from="FireballTimer" to="." method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="ThunderTimer" to="." method="_on_thunder_timer_timeout"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]

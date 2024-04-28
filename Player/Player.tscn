@@ -1,0 +1,401 @@
+[gd_scene load_steps=30 format=3 uid="uid://p5sgkf8e53l1"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
+[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_apd22"]
+[ext_resource type="Texture2D" uid="uid://bohuf8qvprtyq" path="res://Weapons/atk_damage_icon.png" id="3_c520f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45sbc"]
+size = Vector2(50, 50)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc1o4"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pum4f"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.125911, 0.125911, 0.125911, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0, 1, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggyr1"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0, 1, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76dtg"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0, 0.8, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4yrc"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0, 0.8, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8veh0"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0, 0.8, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pphx1"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0, 0.8, 1)
+border_blend = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_apqu2"]
+load_path = "res://.godot/imported/fireball_icon.png-eaaf5decdec7a074de6146a74b820b9e.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_sml3a"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ajs5s"]
+load_path = "res://.godot/imported/thunder_icon.png-6928e79d64ed6003ca4bc54570e0814f.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_xwmqv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_njfm1"]
+load_path = "res://.godot/imported/laser_icon.png-029b19a4fd28b338126a34f644ac8473.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_jf2ri"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xre5p"]
+load_path = "res://.godot/imported/void_icon.png-45387b39401d81c014addbaf2fcd6b7c.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_k5yc7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b6pbi"]
+load_path = "res://.godot/imported/atk_damage_icon.png-7a927b6fbba749bf6427f8559f6b0369.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_84sxk"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sj334"]
+load_path = "res://.godot/imported/atk_speed_icon.png-2ce512ccbfcdcac6906cf796e1eb44cd.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4anv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2qgn0"]
+load_path = "res://.godot/imported/atk_count_icon.png-a55904cf53d21d7ab977a4b540418152.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_fedu2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_46ydx"]
+load_path = "res://.godot/imported/health_icon.png-7968e96ce0eb0f934fdb9b47d478c95c.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_iixmy"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2pgfj"]
+load_path = "res://.godot/imported/move_speed_icon.png-bf3252a3455f67f039a57d3107bbf4dc.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_33t6d"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_brsg7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_apd22")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_45sbc")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 30.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_cc1o4")
+value = 50.0
+show_percentage = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatsLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 191.0
+offset_right = 418.0
+offset_bottom = 575.0
+text = "atk speed:
+projectile count:"
+
+[node name="UpgradeList" type="VBoxContainer" parent="CanvasLayer/Control"]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -50.5
+offset_right = 78.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button0" type="Button" parent="CanvasLayer/Control/UpgradeList"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_pum4f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ggyr1")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/UpgradeList/Button0"]
+visible = false
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_c520f")
+offset = Vector2(-15, 10)
+
+[node name="Button1" type="Button" parent="CanvasLayer/Control/UpgradeList"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_76dtg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n4yrc")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/UpgradeList/Button1"]
+visible = false
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_c520f")
+offset = Vector2(-15, 10)
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control/UpgradeList"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_8veh0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pphx1")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/UpgradeList/Button2"]
+visible = false
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_c520f")
+offset = Vector2(-15, 10)
+
+[node name="KillsLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 735.0
+offset_top = 12.0
+offset_right = 1135.0
+offset_bottom = 62.0
+text = "kills:"
+horizontal_alignment = 2
+
+[node name="fireballIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(3, 3)
+texture = SubResource("CompressedTexture2D_apqu2")
+centered = false
+
+[node name="fireballLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_sml3a")
+horizontal_alignment = 1
+
+[node name="thunderIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(3, 3)
+texture = SubResource("CompressedTexture2D_ajs5s")
+centered = false
+
+[node name="thunderLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_xwmqv")
+horizontal_alignment = 1
+
+[node name="laserIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(3, 3)
+texture = SubResource("CompressedTexture2D_njfm1")
+centered = false
+
+[node name="laserLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_jf2ri")
+horizontal_alignment = 1
+
+[node name="voidIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(3, 3)
+texture = SubResource("CompressedTexture2D_xre5p")
+centered = false
+
+[node name="voidLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_k5yc7")
+horizontal_alignment = 1
+
+[node name="atk_damageIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(2.5, 2.5)
+texture = SubResource("CompressedTexture2D_b6pbi")
+centered = false
+
+[node name="atk_damageLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_84sxk")
+horizontal_alignment = 1
+
+[node name="atk_speedIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(2.5, 2.5)
+texture = SubResource("CompressedTexture2D_sj334")
+centered = false
+
+[node name="atk_speedLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_l4anv")
+horizontal_alignment = 1
+
+[node name="atk_countIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(2.5, 2.5)
+texture = SubResource("CompressedTexture2D_2qgn0")
+centered = false
+
+[node name="atk_countLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_fedu2")
+horizontal_alignment = 1
+
+[node name="healthIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(2.5, 2.5)
+texture = SubResource("CompressedTexture2D_46ydx")
+centered = false
+
+[node name="healthLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_iixmy")
+horizontal_alignment = 1
+
+[node name="move_speedIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(2.5, 2.5)
+texture = SubResource("CompressedTexture2D_2pgfj")
+centered = false
+
+[node name="move_speedLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+label_settings = SubResource("LabelSettings_33t6d")
+horizontal_alignment = 1
+
+[node name="FireballTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ThunderTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LaserTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VoidTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button0" to="." method="_on_button_0_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="timeout" from="FireballTimer" to="." method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="ThunderTimer" to="." method="_on_thunder_timer_timeout"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
+[connection signal="timeout" from="VoidTimer" to="." method="_on_void_timer_timeout"]
