@@ -16,6 +16,8 @@ var chance_mini_boss_enemy = 0 # percentage (0 - 1)
 var chance_multiple_enemies = 0 # percentage (0 - 1)
 var multiple_enemies_count = 1
 
+var minimum_spawn_time = 0.3
+
 func _ready():
 	randomize()
 
@@ -73,6 +75,7 @@ func enemy_died(exp):
 		multiple_enemies_count = 4
 	# up to level 5 at level 40
 	elif enemy_spawn_level <= 3 and get_node('Player').current_level >= 30:
+		minimum_spawn_time = 0.2
 		enemy_spawn_level += 1
 		chance_big_enemy = 0.4
 		chance_small_enemy = 0.3
@@ -86,7 +89,7 @@ func enemy_died(exp):
 		chance_small_enemy = 0.4
 		chance_mini_boss_enemy = 0.1
 		chance_multiple_enemies = 1
-		multiple_enemies_count = 14
+		multiple_enemies_count = 16
 	# up to level 7 at level 60
 	elif enemy_spawn_level <= 3 and get_node('Player').current_level >= 30:
 		enemy_spawn_level += 1
@@ -94,7 +97,7 @@ func enemy_died(exp):
 		chance_small_enemy = 0.4
 		chance_mini_boss_enemy = 0.1
 		chance_multiple_enemies = 1
-		multiple_enemies_count = 30
+		multiple_enemies_count = 40
 
 	# reduce enemy spawn timer
-	enemy_spawn_timer = max(enemy_spawn_timer - 0.05, 0.3)
+	enemy_spawn_timer = max(enemy_spawn_timer - 0.05, minimum_spawn_time)
