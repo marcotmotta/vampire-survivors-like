@@ -33,6 +33,7 @@ func _choose_enemy():
 
 func _on_spawn_timer_timeout():
 	# calculate chance of double enemy
+	var count = 0
 	for i in range(multiple_enemies_count if randf() <= chance_multiple_enemies else 1):
 		# choose spawn point
 		while(true):
@@ -42,6 +43,8 @@ func _on_spawn_timer_timeout():
 				enemy_instance.global_position = spawn_point
 				add_child(enemy_instance)
 				break
+		count += 1
+	print('SPAWNED: ', count)
 
 	$SpawnTimer.start(enemy_spawn_timer)
 
@@ -74,30 +77,29 @@ func enemy_died(exp):
 		chance_multiple_enemies = 0.6
 		multiple_enemies_count = 4
 	# up to level 5 at level 40
-	elif enemy_spawn_level <= 3 and get_node('Player').current_level >= 30:
-		minimum_spawn_time = 0.2
+	elif enemy_spawn_level <= 4 and get_node('Player').current_level >= 40:
 		enemy_spawn_level += 1
-		chance_big_enemy = 0.4
+		chance_big_enemy = 0.3
 		chance_small_enemy = 0.3
 		chance_mini_boss_enemy = 0.05
 		chance_multiple_enemies = 0.8
-		multiple_enemies_count = 10
+		multiple_enemies_count = 5
 	# up to level 6 at level 50
-	elif enemy_spawn_level <= 3 and get_node('Player').current_level >= 30:
+	elif enemy_spawn_level <= 5 and get_node('Player').current_level >= 50:
 		enemy_spawn_level += 1
 		chance_big_enemy = 0.4
 		chance_small_enemy = 0.4
 		chance_mini_boss_enemy = 0.1
 		chance_multiple_enemies = 1
-		multiple_enemies_count = 16
+		multiple_enemies_count = 6
 	# up to level 7 at level 60
-	elif enemy_spawn_level <= 3 and get_node('Player').current_level >= 30:
+	elif enemy_spawn_level <= 6 and get_node('Player').current_level >= 60:
 		enemy_spawn_level += 1
 		chance_big_enemy = 0.4
 		chance_small_enemy = 0.4
 		chance_mini_boss_enemy = 0.1
 		chance_multiple_enemies = 1
-		multiple_enemies_count = 40
+		multiple_enemies_count = 8
 
 	# reduce enemy spawn timer
 	enemy_spawn_timer = max(enemy_spawn_timer - 0.05, minimum_spawn_time)

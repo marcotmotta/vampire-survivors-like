@@ -4,19 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_5v783"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1u6c"]
-size = Vector2(45, 45)
+size = Vector2(37, 37)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw4g8"]
 bg_color = Color(1, 0, 0, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f1n8p"]
-radius = 35.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nstb7"]
+size = Vector2(42, 42)
 
 [node name="BigEnemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_p66bp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(2.3, 2.3)
 texture = ExtResource("2_5v783")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -41,6 +41,6 @@ show_percentage = false
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_f1n8p")
+shape = SubResource("RectangleShape2D_nstb7")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

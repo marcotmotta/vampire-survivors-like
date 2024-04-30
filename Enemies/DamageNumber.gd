@@ -6,7 +6,7 @@ var damage
 func _ready():
 	randomize()
 
-	position = Vector2(position.x + randi_range(-5, 5), position.y + randi_range(-5, 5))
+	position = Vector2(position.x + randi_range(-10, 10), position.y + randi_range(-10, 10))
 
 	var new_label_settings = $Label.label_settings.duplicate()
 	$Label.label_settings = new_label_settings

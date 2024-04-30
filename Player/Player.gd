@@ -175,7 +175,7 @@ var MAX_HEALTH = 100
 var health = MAX_HEALTH
 
 # movement speed logic
-var base_speed = 200
+var base_speed = 150
 var current_speed = base_speed
 
 # fireball logic
@@ -257,14 +257,14 @@ func calculate_icon_position():
 
 	for i in range(buff_icons.size()):
 		var icon = $CanvasLayer/Control.get_node(buff_icons[i] + 'Icon')
-		icon.position = Vector2(20 + i * 50, 100)
+		icon.position = Vector2(20 + i * 50, 110)
 		icon.visible = true
 		var label = $CanvasLayer/Control.get_node(buff_icons[i] + 'Label')
 		var upgrade = upgrades.filter(func(u): return u.upgrade == buff_icons[i])[0]
 		label.text = str(upgrade.current_level)
 		if upgrade.current_level >= upgrade.max_level:
 			label.label_settings.font_color = 'ffd600'
-		label.position = Vector2(20 + i * 50, 142)
+		label.position = Vector2(20 + i * 50, 152)
 		label.visible = true
 
 func _process(delta):
@@ -302,7 +302,7 @@ func _process(delta):
 
 	$CanvasLayer/Control/StatsLabel.text = stats
 
-	$CanvasLayer/Control/KillsLabel.text = 'kills: ' + str(kills)
+	$CanvasLayer/Control/KillsLabel.text = 'Kills: ' + str(kills)
 
 func _get_closest_enemy():
 	var closest_enemy = null
@@ -521,7 +521,7 @@ func upgrade_move_speed():
 	if not buff_icons.has('move_speed'):
 		buff_icons.append('move_speed')
 	# FIXME: remove the min. debug purposes
-	current_speed = min(current_speed + 50, 400)
+	current_speed = min(current_speed + 50, 350)
 
 func get_weapon_fireball():
 	$FireballTimer.start(current_thunder_cooldown)

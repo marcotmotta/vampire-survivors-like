@@ -1,13 +1,18 @@
-[gd_scene load_steps=30 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=32 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
 [ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_apd22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45sbc"]
-size = Vector2(50, 50)
+size = Vector2(38, 38)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc1o4"]
 bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7s40b"]
+font_size = 20
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nj47"]
 bg_color = Color(0, 1, 0.905882, 1)
@@ -100,56 +105,88 @@ border_width_bottom = 4
 border_color = Color(0.8, 0, 0.8, 1)
 border_blend = true
 
+[sub_resource type="LabelSettings" id="LabelSettings_l3iak"]
+font_size = 20
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_apqu2"]
 load_path = "res://.godot/imported/fireball_icon.png-eaaf5decdec7a074de6146a74b820b9e.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_sml3a"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ajs5s"]
 load_path = "res://.godot/imported/thunder_icon.png-6928e79d64ed6003ca4bc54570e0814f.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_xwmqv"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_njfm1"]
 load_path = "res://.godot/imported/laser_icon.png-029b19a4fd28b338126a34f644ac8473.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_jf2ri"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xre5p"]
 load_path = "res://.godot/imported/void_icon.png-45387b39401d81c014addbaf2fcd6b7c.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_k5yc7"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b6pbi"]
 load_path = "res://.godot/imported/atk_damage_icon.png-7a927b6fbba749bf6427f8559f6b0369.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_84sxk"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sj334"]
 load_path = "res://.godot/imported/atk_speed_icon.png-2ce512ccbfcdcac6906cf796e1eb44cd.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_l4anv"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2qgn0"]
 load_path = "res://.godot/imported/atk_count_icon.png-a55904cf53d21d7ab977a4b540418152.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_fedu2"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_46ydx"]
 load_path = "res://.godot/imported/health_icon.png-7968e96ce0eb0f934fdb9b47d478c95c.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_iixmy"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2pgfj"]
 load_path = "res://.godot/imported/move_speed_icon.png-bf3252a3455f67f039a57d3107bbf4dc.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_33t6d"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_brsg7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_apd22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -183,11 +220,12 @@ grow_vertical = 2
 
 [node name="StatsLabel" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = -11.0
-offset_top = 196.0
-offset_right = 89.0
-offset_bottom = 219.0
-text = "Lv. 100"
+offset_left = -12.0
+offset_top = 190.0
+offset_right = 88.0
+offset_bottom = 218.0
+text = "Lv 100"
+label_settings = SubResource("LabelSettings_7s40b")
 horizontal_alignment = 1
 
 [node name="ExpBar" type="ProgressBar" parent="CanvasLayer/Control"]
@@ -249,6 +287,7 @@ offset_top = 12.0
 offset_right = 1135.0
 offset_bottom = 62.0
 text = "kills:"
+label_settings = SubResource("LabelSettings_l3iak")
 horizontal_alignment = 2
 
 [node name="fireballIcon" type="Sprite2D" parent="CanvasLayer/Control"]

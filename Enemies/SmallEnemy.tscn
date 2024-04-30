@@ -10,13 +10,13 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_nqq8a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tduts"]
-size = Vector2(30, 30)
+size = Vector2(26, 26)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af5pr"]
 bg_color = Color(1, 0, 0, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wo8ij"]
-radius = 25.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vv71u"]
+size = Vector2(30, 30)
 
 [sub_resource type="Animation" id="Animation_oq3t1"]
 length = 0.001
@@ -93,11 +93,10 @@ scale_amount_curve = SubResource("Curve_a07wd")
 color_initial_ramp = SubResource("Gradient_nqq8a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.9, 1.9)
+scale = Vector2(1.6, 1.6)
 texture = ExtResource("2_1n3o4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_tduts")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
@@ -117,10 +116,9 @@ value = 50.0
 show_percentage = false
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_wo8ij")
+shape = SubResource("RectangleShape2D_vv71u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
