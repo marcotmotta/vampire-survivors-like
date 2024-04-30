@@ -10,13 +10,13 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_nqq8a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tduts"]
-size = Vector2(26, 26)
+size = Vector2(19, 19)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af5pr"]
 bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vv71u"]
-size = Vector2(30, 30)
+size = Vector2(22, 22)
 
 [sub_resource type="Animation" id="Animation_oq3t1"]
 length = 0.001
@@ -93,7 +93,7 @@ scale_amount_curve = SubResource("Curve_a07wd")
 color_initial_ramp = SubResource("Gradient_nqq8a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.6, 1.6)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_1n3o4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

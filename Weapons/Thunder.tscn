@@ -19,8 +19,8 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_ovlie"]
-offsets = PackedFloat32Array(0, 0.163158, 0.531579)
-colors = PackedColorArray(1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.163158, 0.305263)
+colors = PackedColorArray(1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1)
 
 [node name="Thunder" type="Area2D"]
 script = ExtResource("1_x3mk2")

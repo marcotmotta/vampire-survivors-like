@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_apd22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45sbc"]
-size = Vector2(38, 38)
+size = Vector2(36, 36)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc1o4"]
 bg_color = Color(1, 0, 0, 1)
@@ -186,7 +186,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_brsg7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.28, 0.28)
 texture = ExtResource("2_apd22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

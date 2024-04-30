@@ -10,10 +10,10 @@ var is_max_level = false
 
 func _ready():
 	if is_max_level:
-		aoe_multiplier = 15
+		aoe_multiplier = 14
 		$CPUParticles2D.color = 'ffe200'
 	else:
-		aoe_multiplier = 12
+		aoe_multiplier = 11
 		$CPUParticles2D.color = 'c300ff'
 	radius += aoe * aoe_multiplier
 	$CPUParticles2D.scale = Vector2(radius/100.0, radius/100.0)

@@ -175,7 +175,7 @@ var MAX_HEALTH = 100
 var health = MAX_HEALTH
 
 # movement speed logic
-var base_speed = 150
+var base_speed = 100
 var current_speed = base_speed
 
 # fireball logic
@@ -526,7 +526,7 @@ func upgrade_move_speed():
 	if not buff_icons.has('move_speed'):
 		buff_icons.append('move_speed')
 	# FIXME: remove the min. debug purposes
-	current_speed = min(current_speed + 50, 350)
+	current_speed = min(current_speed + 20, 200)
 
 func get_weapon_fireball():
 	$FireballTimer.start(current_thunder_cooldown)

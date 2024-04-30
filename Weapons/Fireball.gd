@@ -1,7 +1,7 @@
 extends Area2D
 
 var direction
-var speed = 350
+var speed = 250
 var damage
 
 var is_max_level = false
