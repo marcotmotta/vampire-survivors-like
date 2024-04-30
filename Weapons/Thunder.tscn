@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0ta5l2flpeny"]
+[gd_scene load_steps=8 format=3 uid="uid://d0ta5l2flpeny"]
 
 [ext_resource type="Script" path="res://Weapons/Thunder.gd" id="1_x3mk2"]
 [ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_enwel"]
@@ -14,6 +14,14 @@ point_count = 2
 offsets = PackedFloat32Array(0.146667, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 1, 1, 1)
 
+[sub_resource type="Curve" id="Curve_r7o8o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ovlie"]
+offsets = PackedFloat32Array(0, 0.163158, 0.531579)
+colors = PackedColorArray(1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1)
+
 [node name="Thunder" type="Area2D"]
 script = ExtResource("1_x3mk2")
 
@@ -26,7 +34,7 @@ texture = ExtResource("2_enwel")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1y4yd")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="Particle" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 32
 lifetime = 0.7
@@ -44,5 +52,25 @@ scale_amount_max = 15.0
 scale_amount_curve = SubResource("Curve_t1eqw")
 color_ramp = SubResource("Gradient_vx62q")
 
+[node name="Particle2" type="CPUParticles2D" parent="."]
+visible = false
+emitting = false
+amount = 32
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.5
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+scale_amount_min = 15.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_r7o8o")
+color_ramp = SubResource("Gradient_ovlie")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]
+[connection signal="finished" from="Particle" to="." method="_on_cpu_particles_2d_finished"]
+[connection signal="finished" from="Particle2" to="." method="_on_cpu_particles_2d_finished"]

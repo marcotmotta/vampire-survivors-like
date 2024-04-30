@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Weapons/Void.gd" id="1_gpgqh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4eheo"]
-radius = 140.0
+radius = 130.0
 
 [sub_resource type="Curve" id="Curve_2fefo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -15,6 +15,7 @@ point_count = 2
 script = ExtResource("1_gpgqh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_4eheo")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -31,7 +32,7 @@ orbit_velocity_max = 1.0
 scale_amount_min = 5.0
 scale_amount_max = 10.0
 scale_amount_curve = SubResource("Curve_2fefo")
-color = Color(0.764706, 0, 1, 1)
+color = Color(1, 0.886275, 0, 1)
 color_initial_ramp = SubResource("Gradient_31qv2")
 
 [node name="DamageTimer" type="Timer" parent="."]

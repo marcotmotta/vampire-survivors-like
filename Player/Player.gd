@@ -100,7 +100,7 @@ var upgrades = [
 				'label': 'VOID // + Atk Damage',
 				'icon': preload("res://Weapons/void_icon.png"),
 				'rarity': 1,
-				'max_level': 5,
+				'max_level': 4,
 				'current_level': 0
 			},
 			{ # + aoe
@@ -208,7 +208,7 @@ var laser_count = 1
 # void logic
 var void_scene = preload("res://Weapons/Void.tscn")
 var void_icon = preload("res://Weapons/void_icon.png")
-var void_damage = 10
+var void_damage = 6
 var base_void_cooldown = 7 # seconds
 var bonus_void_cooldown = 0 # percentage (0 - 1)
 var current_void_cooldown = base_void_cooldown
@@ -238,19 +238,23 @@ func _physics_process(delta):
 	get_input()
 	move_and_slide()
 
+func calculate_weapon_level(weapon):
+	var upgrade = upgrades.filter(func(u): return u.upgrade == weapon)[0]
+	var sum_max_level = upgrade.max_level
+	sum_max_level = upgrade.upgrades.reduce(func(accum, u): return accum + u.max_level, sum_max_level)
+	var sum_current_level = upgrade.current_level
+	sum_current_level = upgrade.upgrades.reduce(func(accum, u): return accum + u.current_level, sum_current_level)
+	return {'sum_max_level': sum_max_level, 'sum_current_level': sum_current_level}
+
 func calculate_icon_position():
 	for i in range(weapon_icons.size()):
 		var icon = $CanvasLayer/Control.get_node(weapon_icons[i] + 'Icon')
 		icon.position = Vector2(20 + i * 60, 20)
 		icon.visible = true
 		var label = $CanvasLayer/Control.get_node(weapon_icons[i] + 'Label')
-		var upgrade = upgrades.filter(func(u): return u.upgrade == weapon_icons[i])[0]
-		var sum_max_level = upgrade.max_level
-		sum_max_level = upgrade.upgrades.reduce(func(accum, u): return accum + u.max_level, sum_max_level)
-		var sum_current_level = upgrade.current_level
-		sum_current_level = upgrade.upgrades.reduce(func(accum, u): return accum + u.current_level, sum_current_level)
-		label.text = str(sum_current_level)
-		if sum_current_level >= sum_max_level:
+		var sums = calculate_weapon_level(weapon_icons[i])
+		label.text = str(sums.sum_current_level)
+		if sums.sum_current_level >= sums.sum_max_level:
 			label.label_settings.font_color = 'ffd600'
 		label.position = Vector2(20 + i * 60, 70)
 		label.visible = true
@@ -345,13 +349,8 @@ func _on_fireball_timer_timeout():
 			fireball_instance.global_position = global_position
 			fireball_instance.direction = closest_enemy.direction.rotated(deg_to_rad(shift))
 			fireball_instance.damage = fireball_damage
-			var upgrade = upgrades.filter(func(u): return u.upgrade == 'fireball')[0]
-			var sum_max_level = upgrade.max_level
-			sum_max_level = upgrade.upgrades.reduce(func(accum, u): return accum + u.max_level, sum_max_level)
-			var sum_current_level = upgrade.current_level
-			sum_current_level = upgrade.upgrades.reduce(func(accum, u): return accum + u.current_level, sum_current_level)
-			if sum_current_level >= sum_max_level:
-				fireball_instance.is_max_level = true
+			var sums = calculate_weapon_level('fireball')
+			fireball_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(fireball_instance)
 			await get_tree().create_timer(0.05).timeout
 
@@ -363,6 +362,8 @@ func _on_thunder_timer_timeout():
 			var thunder_instance = thunder_scene.instantiate()
 			thunder_instance.global_position = selected_enemy.enemy.global_position
 			thunder_instance.damage = thunder_damage
+			var sums = calculate_weapon_level('thunder')
+			thunder_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(thunder_instance)
 			await get_tree().create_timer(0.15).timeout
 
@@ -374,6 +375,8 @@ func _on_laser_timer_timeout():
 			var laser_instance = laser_scene.instantiate()
 			laser_instance.direction = selected_enemy.direction
 			laser_instance.damage = laser_damage
+			var sums = calculate_weapon_level('laser')
+			laser_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			add_child(laser_instance)
 			await get_tree().create_timer(0.15).timeout
 
@@ -382,6 +385,8 @@ func _on_void_timer_timeout():
 	var void_instance = void_scene.instantiate()
 	void_instance.damage = void_damage
 	void_instance.aoe = void_aoe
+	var sums = calculate_weapon_level('void')
+	void_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 	add_child(void_instance)
 
 # health interation functions
@@ -471,7 +476,7 @@ func upgrade_atk_damage_laser():
 	laser_damage += 1
 
 func upgrade_atk_damage_void():
-	void_damage += 1
+	void_damage += 2
 
 func upgrade_atk_damage_all():
 	if not buff_icons.has('atk_damage'):
