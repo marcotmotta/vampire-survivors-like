@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=33 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
 [ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_apd22"]
+[ext_resource type="Script" path="res://Player/PauseUI.gd" id="4_smkue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45sbc"]
 size = Vector2(36, 36)
@@ -280,6 +281,39 @@ theme_override_constants/h_separation = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_8veh0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pphx1")
 
+[node name="PauseUI" type="Control" parent="CanvasLayer/Control"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_smkue")
+
+[node name="DamageDealtLabel" type="RichTextLabel" parent="CanvasLayer/Control/PauseUI"]
+offset_left = 1005.0
+offset_top = 195.0
+offset_right = 1147.0
+offset_bottom = 493.0
+text = "fireball: 100000"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/Control/PauseUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -15.5
+offset_right = 22.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+
 [node name="KillsLabel" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 735.0
@@ -443,6 +477,7 @@ one_shot = true
 [connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/Control/UpgradeList/Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/PauseUI/ExitButton" to="CanvasLayer/Control/PauseUI" method="_on_exit_button_pressed"]
 [connection signal="timeout" from="FireballTimer" to="." method="_on_fireball_timer_timeout"]
 [connection signal="timeout" from="ThunderTimer" to="." method="_on_thunder_timer_timeout"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]

@@ -45,12 +45,17 @@ func _physics_process(delta):
 	else:
 		$Sprite2D.flip_h = false
 
-func take_damage(dmg):
+func take_damage(source, dmg):
+	# damage number
 	var damage_number_instance = damage_number_scene.instantiate()
 	damage_number_instance.damage = dmg
 	damage_number_instance.global_position = global_position
 	get_parent().add_child(damage_number_instance)
+
 	health -= dmg
+
+	get_parent().add_weapon_damage(source, dmg)
+
 	if health <= 0:
 		get_parent().enemy_died(exp)
 		if randf() <= chance_to_drop:

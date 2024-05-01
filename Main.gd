@@ -18,8 +18,25 @@ var multiple_enemies_count = 1
 
 var minimum_spawn_time = 0.3
 
+# weapon damages
+var fireball_damage = 0
+var thunder_damage = 0
+var laser_damage = 0
+var void_damage = 0
+
 func _ready():
 	randomize()
+
+func add_weapon_damage(source, dmg):
+	match source:
+		'fireball':
+			get_node('Player').fireball_damage_dealt += dmg
+		'thunder':
+			get_node('Player').thunder_damage_dealt += dmg
+		'laser':
+			get_node('Player').laser_damage_dealt += dmg
+		'void':
+			get_node('Player').void_damage_dealt += dmg
 
 func _choose_enemy():
 	var chance = randf()
@@ -33,7 +50,6 @@ func _choose_enemy():
 
 func _on_spawn_timer_timeout():
 	# calculate chance of double enemy
-	var count = 0
 	for i in range(multiple_enemies_count if randf() <= chance_multiple_enemies else 1):
 		# choose spawn point
 		while(true):
@@ -43,8 +59,6 @@ func _on_spawn_timer_timeout():
 				enemy_instance.global_position = spawn_point
 				add_child(enemy_instance)
 				break
-		count += 1
-	print('SPAWNED: ', count)
 
 	$SpawnTimer.start(enemy_spawn_timer)
 

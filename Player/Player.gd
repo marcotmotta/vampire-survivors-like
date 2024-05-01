@@ -195,6 +195,7 @@ var base_fireball_cooldown = 2 # seconds
 var bonus_fireball_cooldown = 0 # percentage (0 - 1)
 var current_fireball_cooldown = base_fireball_cooldown
 var fireball_count = 1
+var fireball_damage_dealt = 0
 
 # thunder logic
 var thunder_scene = preload("res://Weapons/Thunder.tscn")
@@ -204,6 +205,7 @@ var base_thunder_cooldown = 2.8 # seconds
 var bonus_thunder_cooldown = 0 # percentage (0 - 1)
 var current_thunder_cooldown = base_thunder_cooldown
 var thunder_count = 1
+var thunder_damage_dealt = 0
 
 # laser logic
 var laser_scene = preload("res://Weapons/Laser.tscn")
@@ -213,6 +215,7 @@ var base_laser_cooldown = 3 # seconds
 var bonus_laser_cooldown = 0 # percentage (0 - 1)
 var current_laser_cooldown = base_laser_cooldown
 var laser_count = 1
+var laser_damage_dealt = 0
 
 # void logic
 var void_scene = preload("res://Weapons/Void.tscn")
@@ -222,6 +225,7 @@ var base_void_cooldown = 7 # seconds
 var bonus_void_cooldown = 0 # percentage (0 - 1)
 var current_void_cooldown = base_void_cooldown
 var void_aoe = 0
+var void_damage_dealt = 0
 
 # exp and leveling
 # exp needed to level = base_exp + current_level * exp_level_ratio
@@ -231,6 +235,8 @@ var exp_level_ratio = 3
 var current_exp = 0
 
 var kills = 0
+
+var upgrading = false
 
 func _ready():
 	randomize()
@@ -322,6 +328,16 @@ func _process(delta):
 
 	$CanvasLayer/Control/StatsLabel.text = stats
 
+	# show damage dealt
+	var damage_dealt = ''
+	damage_dealt += 'Fireball: ' + str(fireball_damage_dealt) + '\n'
+	damage_dealt += 'Thunder: ' + str(thunder_damage_dealt) + '\n'
+	damage_dealt += 'Laser: ' + str(laser_damage_dealt) + '\n'
+	damage_dealt += 'Void: ' + str(void_damage_dealt) + '\n'
+
+	$CanvasLayer/Control/PauseUI/DamageDealtLabel.text = damage_dealt
+
+	# show kill count
 	$CanvasLayer/Control/KillsLabel.text = 'Kills: ' + str(kills)
 
 func _get_closest_enemy():
@@ -473,6 +489,7 @@ func level_up():
 	current_level += 1
 	_get_upgrades()
 	$CanvasLayer/Control/UpgradeList.visible = true
+	upgrading = true
 	get_tree().paused = true
 
 func get_exp(amount):
@@ -480,12 +497,6 @@ func get_exp(amount):
 	if current_exp >= base_exp + current_level * exp_level_ratio: # simple level up logic
 		current_exp = 0
 		level_up()
-
-# FIXME: remove this - debug only
-func _unhandled_input(event):
-	if Input.is_action_just_pressed("f1"):
-		$CanvasLayer/Control/UpgradeList.visible = true
-		get_tree().paused = true
 
 # upgrade functions
 func upgrade_atk_damage_fireball():
@@ -571,6 +582,7 @@ func _on_button_0_pressed():
 	play_sound(fixed_sound_scene, upgrade_sound)
 	buttons[0].callable.call()
 	buttons[0].current_level += 1
+	upgrading = false
 	get_tree().paused = false
 	$CanvasLayer/Control/UpgradeList.visible = false
 
@@ -578,6 +590,7 @@ func _on_button_1_pressed():
 	play_sound(fixed_sound_scene, upgrade_sound)
 	buttons[1].callable.call()
 	buttons[1].current_level += 1
+	upgrading = false
 	get_tree().paused = false
 	$CanvasLayer/Control/UpgradeList.visible = false
 
@@ -585,6 +598,7 @@ func _on_button_2_pressed():
 	play_sound(fixed_sound_scene, upgrade_sound)
 	buttons[2].callable.call()
 	buttons[2].current_level += 1
+	upgrading = false
 	get_tree().paused = false
 	$CanvasLayer/Control/UpgradeList.visible = false
 

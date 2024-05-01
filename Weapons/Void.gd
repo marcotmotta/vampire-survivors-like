@@ -28,7 +28,7 @@ func _on_damage_timer_timeout():
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group('enemy'):
-			body.take_damage(damage/2)
+			body.take_damage('void', damage/2)
 
 func _on_expiration_timer_timeout():
 	queue_free()
