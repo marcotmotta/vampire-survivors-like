@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://78gy6k3ln7ry"]
+
+[node name="FixedSound" type="AudioStreamPlayer"]
+process_mode = 3
+volume_db = -10.0
+autoplay = true

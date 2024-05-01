@@ -165,6 +165,15 @@ var upgrades = [
 	},
 ]
 
+# sounds
+var sound_scene = preload("res://SFX/Sound.tscn")
+var fixed_sound_scene = preload("res://SFX/FixedSound.tscn")
+var level_up_sound = preload("res://SFX/level_up_sound.wav")
+var hurt_sound = preload("res://SFX/hurt_sound.wav")
+var heal_sound = preload("res://SFX/heal_sound.wav")
+var hover_sound = preload("res://SFX/hover_sound.wav")
+var upgrade_sound = preload("res://SFX/upgrade_sound.wav")
+
 var buttons = [{},{},{}]
 
 var weapon_icons = []
@@ -191,7 +200,7 @@ var fireball_count = 1
 var thunder_scene = preload("res://Weapons/Thunder.tscn")
 var thunder_icon = preload("res://Weapons/thunder_icon.png")
 var thunder_damage = 10
-var base_thunder_cooldown = 3 # seconds
+var base_thunder_cooldown = 2.8 # seconds
 var bonus_thunder_cooldown = 0 # percentage (0 - 1)
 var current_thunder_cooldown = base_thunder_cooldown
 var thunder_count = 1
@@ -237,6 +246,13 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+
+func play_sound(scene, sound):
+	var sound_instance = scene.instantiate()
+	sound_instance.stream = sound
+	if sound_instance is AudioStreamPlayer2D:
+		sound_instance.global_position = global_position
+	get_parent().add_child(sound_instance)
 
 func calculate_weapon_level(weapon):
 	var upgrade = upgrades.filter(func(u): return u.upgrade == weapon)[0]
@@ -391,9 +407,13 @@ func _on_void_timer_timeout():
 
 # health interation functions
 func heal(amount):
+	play_sound(sound_scene, heal_sound)
+
 	health = min(health + amount, MAX_HEALTH)
 
 func take_damage(amount):
+	play_sound(sound_scene, hurt_sound)
+
 	health -= amount
 	if health <= 0:
 		get_tree().change_scene_to_file("res://Menu.tscn")
@@ -448,6 +468,8 @@ func _get_upgrades():
 			button.disabled = true
 
 func level_up():
+	play_sound(fixed_sound_scene, level_up_sound)
+
 	current_level += 1
 	_get_upgrades()
 	$CanvasLayer/Control/UpgradeList.visible = true
@@ -546,19 +568,31 @@ func get_weapon_void():
 
 # upgrade buttons
 func _on_button_0_pressed():
+	play_sound(fixed_sound_scene, upgrade_sound)
 	buttons[0].callable.call()
 	buttons[0].current_level += 1
 	get_tree().paused = false
 	$CanvasLayer/Control/UpgradeList.visible = false
 
 func _on_button_1_pressed():
+	play_sound(fixed_sound_scene, upgrade_sound)
 	buttons[1].callable.call()
 	buttons[1].current_level += 1
 	get_tree().paused = false
 	$CanvasLayer/Control/UpgradeList.visible = false
 
 func _on_button_2_pressed():
+	play_sound(fixed_sound_scene, upgrade_sound)
 	buttons[2].callable.call()
 	buttons[2].current_level += 1
 	get_tree().paused = false
 	$CanvasLayer/Control/UpgradeList.visible = false
+
+func _on_button_0_mouse_entered():
+	play_sound(fixed_sound_scene, hover_sound)
+
+func _on_button_1_mouse_entered():
+	play_sound(fixed_sound_scene, hover_sound)
+
+func _on_button_2_mouse_entered():
+	play_sound(fixed_sound_scene, hover_sound)

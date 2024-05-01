@@ -437,8 +437,11 @@ one_shot = true
 [node name="VoidTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="mouse_entered" from="CanvasLayer/Control/UpgradeList/Button0" to="." method="_on_button_0_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button0" to="." method="_on_button_0_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/UpgradeList/Button1" to="." method="_on_button_1_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/UpgradeList/Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="timeout" from="FireballTimer" to="." method="_on_fireball_timer_timeout"]
 [connection signal="timeout" from="ThunderTimer" to="." method="_on_thunder_timer_timeout"]
