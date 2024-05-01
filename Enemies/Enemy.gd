@@ -15,7 +15,7 @@ var damage
 var exp
 
 # heal (or item?) drop
-var heal_scene = preload("res://Heal.tscn")
+var heal_scene = preload("res://Pickups/Heal.tscn")
 var chance_to_drop = 0.01 # percent (0 - 1)
 
 func _ready():

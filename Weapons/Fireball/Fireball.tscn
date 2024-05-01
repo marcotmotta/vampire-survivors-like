@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b05c4mqaionpj"]
 
-[ext_resource type="Script" path="res://Weapons/Fireball.gd" id="1_amywe"]
-[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_v21gc"]
+[ext_resource type="Script" path="res://Weapons/Fireball/Fireball.gd" id="1_tmajq"]
+[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_sduku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j1ph8"]
 radius = 15.0
@@ -23,13 +23,13 @@ offsets = PackedFloat32Array(0, 0.113333, 0.293333)
 colors = PackedColorArray(1, 1, 1, 1, 1, 0.447059, 0, 1, 1, 0, 0, 1)
 
 [node name="Fireball" type="Area2D"]
-script = ExtResource("1_amywe")
+script = ExtResource("1_tmajq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 0, 1, 1)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_v21gc")
+texture = ExtResource("2_sduku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j1ph8")

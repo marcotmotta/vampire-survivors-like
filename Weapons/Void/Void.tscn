@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxoi3lgc8l0tx"]
 
-[ext_resource type="Script" path="res://Weapons/Void.gd" id="1_gpgqh"]
+[ext_resource type="Script" path="res://Weapons/Void/Void.gd" id="1_kmx5w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4eheo"]
 radius = 130.0
@@ -12,7 +12,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_31qv2"]
 
 [node name="Void" type="Area2D"]
-script = ExtResource("1_gpgqh")
+script = ExtResource("1_kmx5w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

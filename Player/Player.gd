@@ -188,7 +188,7 @@ var base_speed = 100
 var current_speed = base_speed
 
 # fireball logic
-var fireball_scene = preload("res://Weapons/Fireball.tscn")
+var fireball_scene = preload("res://Weapons/Fireball/Fireball.tscn")
 var fireball_icon = preload("res://Weapons/fireball_icon.png")
 var fireball_damage = 10
 var base_fireball_cooldown = 2 # seconds
@@ -198,7 +198,7 @@ var fireball_count = 1
 var fireball_damage_dealt = 0
 
 # thunder logic
-var thunder_scene = preload("res://Weapons/Thunder.tscn")
+var thunder_scene = preload("res://Weapons/Thunder/Thunder.tscn")
 var thunder_icon = preload("res://Weapons/thunder_icon.png")
 var thunder_damage = 10
 var base_thunder_cooldown = 2.8 # seconds
@@ -208,7 +208,7 @@ var thunder_count = 1
 var thunder_damage_dealt = 0
 
 # laser logic
-var laser_scene = preload("res://Weapons/Laser.tscn")
+var laser_scene = preload("res://Weapons/Laser/Laser.tscn")
 var laser_icon = preload("res://Weapons/laser_icon.png")
 var laser_damage = 10
 var base_laser_cooldown = 3 # seconds
@@ -218,7 +218,7 @@ var laser_count = 1
 var laser_damage_dealt = 0
 
 # void logic
-var void_scene = preload("res://Weapons/Void.tscn")
+var void_scene = preload("res://Weapons/Void/Void.tscn")
 var void_icon = preload("res://Weapons/void_icon.png")
 var void_damage = 6
 var base_void_cooldown = 7 # seconds

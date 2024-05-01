@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://drarq5wuwwga3"]
 
-[ext_resource type="Script" path="res://Weapons/Laser.gd" id="1_7pj1t"]
+[ext_resource type="Script" path="res://Weapons/Laser/Laser.gd" id="1_82ci0"]
 
 [sub_resource type="Curve" id="Curve_nmtvf"]
 min_value = -360.0
@@ -23,7 +23,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.362637), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Laser" type="Node2D"]
-script = ExtResource("1_7pj1t")
+script = ExtResource("1_82ci0")
 
 [node name="RayCast" type="RayCast2D" parent="."]
 target_position = Vector2(550, 0)

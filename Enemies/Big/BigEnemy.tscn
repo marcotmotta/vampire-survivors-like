@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d1t3x6d4uibbt"]
 
-[ext_resource type="Script" path="res://Enemies/BigEnemy.gd" id="1_p66bp"]
-[ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_5v783"]
+[ext_resource type="Script" path="res://Enemies/Big/BigEnemy.gd" id="1_luh54"]
+[ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_107hs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1u6c"]
 size = Vector2(34, 34)
@@ -13,11 +13,11 @@ bg_color = Color(1, 0, 0, 1)
 size = Vector2(38, 38)
 
 [node name="BigEnemy" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_p66bp")
+script = ExtResource("1_luh54")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.1, 2.1)
-texture = ExtResource("2_5v783")
+texture = ExtResource("2_107hs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n1u6c")

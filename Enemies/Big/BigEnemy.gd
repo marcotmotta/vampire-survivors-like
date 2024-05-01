@@ -1,4 +1,4 @@
-extends "Enemy.gd"
+extends "../Enemy.gd"
 
 func set_stats():
 	MAX_HEALTH = 30

@@ -1,22 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxq5dbfe7v6n3"]
+[gd_scene load_steps=10 format=3 uid="uid://bxi0a38s8ykau"]
 
-[ext_resource type="Script" path="res://Enemies/SmallEnemy.gd" id="1_dcbgi"]
-[ext_resource type="Texture2D" uid="uid://q3mijvyaa3ph" path="res://Weapons/ghost.png" id="2_1n3o4"]
+[ext_resource type="Script" path="res://Enemies/Normal/NormalEnemy.gd" id="1_hjg7s"]
+[ext_resource type="Texture2D" uid="uid://duvqg8iacw3j5" path="res://Enemies/eye.png" id="2_umb7k"]
 
-[sub_resource type="Curve" id="Curve_a07wd"]
+[sub_resource type="Curve" id="Curve_gqmc8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_nqq8a"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvrup"]
+size = Vector2(24, 24)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tduts"]
-size = Vector2(19, 19)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af5pr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_om6a4"]
 bg_color = Color(1, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vv71u"]
-size = Vector2(22, 22)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mdm1"]
+size = Vector2(27, 27)
 
 [sub_resource type="Animation" id="Animation_oq3t1"]
 length = 0.001
@@ -80,24 +78,26 @@ _data = {
 "walk": SubResource("Animation_jgbxa")
 }
 
-[node name="SmallEnemy" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_dcbgi")
+[node name="Normal" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_hjg7s")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-lifetime = 0.5
+amount = 4
+randomness = 1.0
+local_coords = true
 emission_shape = 1
-emission_sphere_radius = 5.0
-gravity = Vector2(0, 0)
-scale_amount_max = 5.0
-scale_amount_curve = SubResource("Curve_a07wd")
-color_initial_ramp = SubResource("Gradient_nqq8a")
+emission_sphere_radius = 10.0
+gravity = Vector2(0, 200)
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_gqmc8")
+color = Color(0.49, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_1n3o4")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_umb7k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_tduts")
+shape = SubResource("RectangleShape2D_wvrup")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 anchors_preset = 8
@@ -111,14 +111,14 @@ offset_right = 20.0
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_af5pr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_om6a4")
 value = 50.0
 show_percentage = false
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_vv71u")
+shape = SubResource("RectangleShape2D_8mdm1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

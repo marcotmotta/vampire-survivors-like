@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d0ta5l2flpeny"]
 
-[ext_resource type="Script" path="res://Weapons/Thunder.gd" id="1_x3mk2"]
-[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_enwel"]
+[ext_resource type="Script" path="res://Weapons/Thunder/Thunder.gd" id="1_384uh"]
+[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_k1jpl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1y4yd"]
 radius = 15.0
@@ -23,13 +23,13 @@ offsets = PackedFloat32Array(0, 0.163158, 0.305263)
 colors = PackedColorArray(1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1)
 
 [node name="Thunder" type="Area2D"]
-script = ExtResource("1_x3mk2")
+script = ExtResource("1_384uh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 0, 1, 1)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_enwel")
+texture = ExtResource("2_k1jpl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1y4yd")

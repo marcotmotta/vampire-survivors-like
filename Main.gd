@@ -1,9 +1,9 @@
 extends Node2D
 
-var normal_enemy_scene = preload("res://Enemies/NormalEnemy.tscn")
-var big_enemy_scene = preload("res://Enemies/BigEnemy.tscn")
-var small_enemy_scene = preload("res://Enemies/SmallEnemy.tscn")
-var mini_boss_enemy_scene = preload("res://Enemies/MiniBossEnemy.tscn")
+var normal_enemy_scene = preload("res://Enemies/Normal/NormalEnemy.tscn")
+var big_enemy_scene = preload("res://Enemies/Big/BigEnemy.tscn")
+var small_enemy_scene = preload("res://Enemies/Small/SmallEnemy.tscn")
+var mini_boss_enemy_scene = preload("res://Enemies/MiniBoss/MiniBossEnemy.tscn")
 
 var enemy_spawn_timer = 2 # in seconds
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d0mhxwu2erjeu"]
 
-[ext_resource type="Script" path="res://Enemies/MiniBossEnemy.gd" id="1_ail1w"]
-[ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_0dycq"]
+[ext_resource type="Script" path="res://Enemies/MiniBoss/MiniBossEnemy.gd" id="1_n4y82"]
+[ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_3pbd1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6x7lo"]
 size = Vector2(37, 37)
@@ -13,12 +13,12 @@ bg_color = Color(1, 0, 0, 1)
 size = Vector2(40, 40)
 
 [node name="MiniBossEnemy" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_ail1w")
+script = ExtResource("1_n4y82")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)
 scale = Vector2(2.3, 2.3)
-texture = ExtResource("2_0dycq")
+texture = ExtResource("2_3pbd1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6x7lo")
