@@ -1,9 +1,9 @@
 extends Area2D
 
 var sound_scene = preload("res://SFX/Sound.tscn")
-var sound = preload("res://SFX/void_sound.wav")
+var sound = preload("res://SFX/poison_sound.wav")
 
-var radius = 100
+var radius = 40
 var aoe
 var aoe_multiplier
 
@@ -15,21 +15,21 @@ func _ready():
 	play_sound()
 
 	if is_max_level:
-		aoe_multiplier = 14
-		$CPUParticles2D.color = 'ffe200'
+		aoe_multiplier = 7
+		$CPUParticles2D.color = 'ffbf00'
 	else:
-		aoe_multiplier = 11
-		$CPUParticles2D.color = 'c300ff'
+		aoe_multiplier = 4
+		$CPUParticles2D.color = '77ff00'
 
 	radius += aoe * aoe_multiplier
-	$CPUParticles2D.scale = Vector2(radius/100.0, radius/100.0)
-	$CollisionShape2D.shape.radius = radius + 30
+	$CPUParticles2D.scale = Vector2(radius/40.0, radius/40.0)
+	$CollisionShape2D.shape.radius = radius + 10
 
 func _on_damage_timer_timeout():
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group('enemy'):
-			body.take_damage('void', damage/2)
+			body.take_damage('poison', damage/2)
 
 func _on_expiration_timer_timeout():
 	queue_free()

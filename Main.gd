@@ -18,12 +18,6 @@ var multiple_enemies_count = 1
 
 var minimum_spawn_time = 0.3
 
-# weapon damages
-var fireball_damage = 0
-var thunder_damage = 0
-var laser_damage = 0
-var void_damage = 0
-
 func _ready():
 	randomize()
 
@@ -37,6 +31,8 @@ func add_weapon_damage(source, dmg):
 			get_node('Player').laser_damage_dealt += dmg
 		'void':
 			get_node('Player').void_damage_dealt += dmg
+		'poison':
+			get_node('Player').poison_damage_dealt += dmg
 
 func _choose_enemy():
 	var chance = randf()

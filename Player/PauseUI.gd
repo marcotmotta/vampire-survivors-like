@@ -8,3 +8,7 @@ func _unhandled_input(event):
 func _on_exit_button_pressed():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Menu.tscn")
+
+func _on_continue_button_pressed():
+	get_tree().paused = false
+	self.visible = get_tree().paused
