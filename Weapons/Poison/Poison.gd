@@ -3,9 +3,9 @@ extends Area2D
 var sound_scene = preload("res://SFX/Sound.tscn")
 var sound = preload("res://SFX/poison_sound.wav")
 
-var radius = 40
+var radius = 30
 var aoe
-var aoe_multiplier
+var aoe_multiplier = 5
 
 var damage
 
@@ -15,14 +15,13 @@ func _ready():
 	play_sound()
 
 	if is_max_level:
-		aoe_multiplier = 7
+		aoe += 1
 		$CPUParticles2D.color = 'ffbf00'
 	else:
-		aoe_multiplier = 4
 		$CPUParticles2D.color = '77ff00'
 
 	radius += aoe * aoe_multiplier
-	$CPUParticles2D.scale = Vector2(radius/40.0, radius/40.0)
+	$CPUParticles2D.scale = Vector2(radius/30.0, radius/30.0)
 	$CollisionShape2D.shape.radius = radius + 10
 
 func _on_damage_timer_timeout():

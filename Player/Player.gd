@@ -236,7 +236,7 @@ var fireball_damage_dealt = 0
 # thunder logic
 var thunder_scene = preload("res://Weapons/Thunder/Thunder.tscn")
 var thunder_icon = preload("res://Weapons/thunder_icon.png")
-var thunder_damage = 10
+var thunder_damage = 15
 var base_thunder_cooldown = 2.8 # seconds
 var bonus_thunder_cooldown = 0 # percentage (0 - 1)
 var current_thunder_cooldown = base_thunder_cooldown

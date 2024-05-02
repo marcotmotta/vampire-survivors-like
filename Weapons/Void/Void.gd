@@ -5,7 +5,7 @@ var sound = preload("res://SFX/void_sound.wav")
 
 var radius = 100
 var aoe
-var aoe_multiplier
+var aoe_multiplier = 11
 
 var damage
 
@@ -15,10 +15,9 @@ func _ready():
 	play_sound()
 
 	if is_max_level:
-		aoe_multiplier = 14
+		aoe += 1
 		$CPUParticles2D.color = 'ffe200'
 	else:
-		aoe_multiplier = 11
 		$CPUParticles2D.color = 'c300ff'
 
 	radius += aoe * aoe_multiplier
