@@ -100,7 +100,7 @@ var upgrades = [
 				'label': 'VOID // + Atk Damage',
 				'icon': preload("res://Weapons/void_icon.png"),
 				'rarity': 1,
-				'max_level': 4,
+				'max_level': 4, # must be a pair number (mark do futuro: nao pergunte apenas aceite)
 				'current_level': 0
 			},
 			{ # + aoe
@@ -111,6 +111,42 @@ var upgrades = [
 				'max_level': 3,
 				'current_level': 0
 			}
+		]
+	},
+	{
+		'upgrade': 'poison',
+		'callable': Callable(self, 'get_weapon_poison'),
+		'type': 'weapon',
+		'label': 'POISON // NEW WEAPON',
+		'icon': preload("res://Weapons/poison_icon.png"),
+		'rarity': 1,
+		'max_level': 1,
+		'current_level': 0,
+		'upgrades': [
+			{ # + atk damage
+				'callable': Callable(self, 'upgrade_atk_damage_poison'),
+				'label': 'POISON // + Atk Damage',
+				'icon': preload("res://Weapons/poison_icon.png"),
+				'rarity': 1,
+				'max_level': 4, # must be a pair number (mark do futuro: nao pergunte apenas aceite)
+				'current_level': 0
+			},
+			{ # + aoe
+				'callable': Callable(self, 'upgrade_aoe_poison'),
+				'label': 'POISON // + AoE',
+				'icon': preload("res://Weapons/poison_icon.png"),
+				'rarity': 1,
+				'max_level': 3,
+				'current_level': 0
+			},
+			{ # + atk count
+				'callable': Callable(self, 'upgrade_atk_count_poison'),
+				'label': 'POISON // + Atk Count',
+				'icon': preload("res://Weapons/poison_icon.png"),
+				'rarity': 1,
+				'max_level': 2,
+				'current_level': 0
+			},
 		]
 	},
 	{
@@ -227,6 +263,17 @@ var current_void_cooldown = base_void_cooldown
 var void_aoe = 0
 var void_damage_dealt = 0
 
+# poison logic
+var poison_scene = preload("res://Weapons/Poison/Poison.tscn")
+var poison_icon = preload("res://Weapons/poison_icon.png")
+var poison_damage = 6
+var base_poison_cooldown = 6 # seconds
+var bonus_poison_cooldown = 0 # percentage (0 - 1)
+var current_poison_cooldown = base_poison_cooldown
+var poison_aoe = 0
+var poison_count = 1
+var poison_damage_dealt = 0
+
 # exp and leveling
 # exp needed to level = base_exp + current_level * exp_level_ratio
 var current_level = 1
@@ -243,7 +290,7 @@ func _ready():
 
 	# FIXME: set the starting weapon. debug purposes
 	get_weapon_fireball()
-	#get_weapon_void()
+	#get_weapon_poison()
 
 func get_input():
 	var input_direction = Input.get_vector("a", "d", "w", "s")
@@ -307,6 +354,7 @@ func _process(delta):
 	current_thunder_cooldown = base_thunder_cooldown * (1 - bonus_thunder_cooldown)
 	current_laser_cooldown = base_laser_cooldown * (1 - bonus_laser_cooldown)
 	current_void_cooldown = base_void_cooldown * (1 - bonus_void_cooldown)
+	current_poison_cooldown = base_poison_cooldown * (1 - bonus_poison_cooldown)
 
 	# icons
 	calculate_icon_position()
@@ -334,6 +382,7 @@ func _process(delta):
 	damage_dealt += 'Thunder: ' + str(thunder_damage_dealt) + '\n'
 	damage_dealt += 'Laser: ' + str(laser_damage_dealt) + '\n'
 	damage_dealt += 'Void: ' + str(void_damage_dealt) + '\n'
+	damage_dealt += 'Poison: ' + str(poison_damage_dealt) + '\n'
 
 	$CanvasLayer/Control/PauseUI/DamageDealtLabel.text = damage_dealt
 
@@ -397,7 +446,7 @@ func _on_thunder_timer_timeout():
 			var sums = calculate_weapon_level('thunder')
 			thunder_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(thunder_instance)
-			await get_tree().create_timer(0.15).timeout
+			await get_tree().create_timer(0.10).timeout
 
 func _on_laser_timer_timeout():
 	$LaserTimer.start(current_laser_cooldown)
@@ -420,6 +469,20 @@ func _on_void_timer_timeout():
 	var sums = calculate_weapon_level('void')
 	void_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 	add_child(void_instance)
+
+func _on_poison_timer_timeout():
+	$PoisonTimer.start(current_poison_cooldown)
+	for i in range(poison_count):
+		var selected_enemy = _get_random_enemy()
+		if selected_enemy.enemy:
+			var poison_instance = poison_scene.instantiate()
+			poison_instance.global_position = ((selected_enemy.enemy.global_position - global_position) / 1.3) + global_position
+			poison_instance.damage = poison_damage
+			poison_instance.aoe = poison_aoe
+			var sums = calculate_weapon_level('poison')
+			poison_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
+			get_parent().add_child(poison_instance)
+			await get_tree().create_timer(0.15).timeout
 
 # health interation functions
 func heal(amount):
@@ -457,7 +520,6 @@ func _get_upgrades():
 		if i < filtered_upgrades.size():
 			var selected_upgrade = filtered_upgrades[i]
 			button.text = selected_upgrade.label
-			#button.get_node('Sprite2D').texture = selected_upgrade.icon
 			button.icon = selected_upgrade.icon
 			if selected_upgrade.rarity == 3:
 				button['theme_override_colors/font_color'] = 'ffd600'
@@ -478,7 +540,6 @@ func _get_upgrades():
 			button.disabled = false
 		else:
 			button.text = ''
-			#button.get_node('Sprite2D').texture = null
 			button.icon = null
 			buttons[i] = {}
 			button.disabled = true
@@ -511,6 +572,9 @@ func upgrade_atk_damage_laser():
 func upgrade_atk_damage_void():
 	void_damage += 2
 
+func upgrade_atk_damage_poison():
+	poison_damage += 2
+
 func upgrade_atk_damage_all():
 	if not buff_icons.has('atk_damage'):
 		buff_icons.append('atk_damage')
@@ -518,6 +582,7 @@ func upgrade_atk_damage_all():
 	upgrade_atk_damage_thunder()
 	upgrade_atk_damage_laser()
 	upgrade_atk_damage_void()
+	upgrade_atk_damage_poison()
 
 func upgrade_atk_speed_all():
 	if not buff_icons.has('atk_speed'):
@@ -529,6 +594,7 @@ func upgrade_atk_speed_all():
 	bonus_thunder_cooldown = bonus_thunder_cooldown + 0.05
 	bonus_laser_cooldown = bonus_laser_cooldown + 0.05
 	bonus_void_cooldown = bonus_void_cooldown + 0.05
+	bonus_poison_cooldown = bonus_poison_cooldown + 0.05
 
 func upgrade_atk_count_fireball():
 	fireball_count += 1
@@ -539,15 +605,22 @@ func upgrade_atk_count_thunder():
 func upgrade_atk_count_laser():
 	laser_count += 1
 
+func upgrade_atk_count_poison():
+	poison_count += 1
+
 func upgrade_atk_count_all():
 	if not buff_icons.has('atk_count'):
 		buff_icons.append('atk_count')
 	upgrade_atk_count_fireball()
 	upgrade_atk_count_thunder()
 	upgrade_atk_count_laser()
+	upgrade_atk_count_poison()
 
 func upgrade_aoe_void():
 	void_aoe += 1
+
+func upgrade_aoe_poison():
+	poison_aoe += 1
 
 func upgrade_health():
 	if not buff_icons.has('health'):
@@ -576,6 +649,10 @@ func get_weapon_laser():
 func get_weapon_void():
 	$VoidTimer.start(1)
 	weapon_icons.append('void')
+
+func get_weapon_poison():
+	$PoisonTimer.start(1)
+	weapon_icons.append('poison')
 
 # upgrade buttons
 func _on_button_0_pressed():

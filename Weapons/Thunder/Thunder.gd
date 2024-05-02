@@ -14,7 +14,7 @@ func _ready():
 		$Particle.visible = false
 		$Particle2.visible = true
 		$Particle2.emitting = true
-		damage *= 1.5 # FIXME: bad balancing
+		damage *= 2 # FIXME: bad balancing
 	else:
 		$Particle.visible = true
 		$Particle2.visible = false
