@@ -22,17 +22,7 @@ func _ready():
 	randomize()
 
 func add_weapon_damage(source, dmg):
-	match source:
-		'fireball':
-			get_node('Player').fireball_damage_dealt += dmg
-		'thunder':
-			get_node('Player').thunder_damage_dealt += dmg
-		'laser':
-			get_node('Player').laser_damage_dealt += dmg
-		'void':
-			get_node('Player').void_damage_dealt += dmg
-		'poison':
-			get_node('Player').poison_damage_dealt += dmg
+	get_node('Player').upgrades[source].stats.damage_dealt += dmg
 
 func _choose_enemy():
 	var chance = randf()

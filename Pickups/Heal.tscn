@@ -17,7 +17,7 @@ texture = ExtResource("2_amnpl")
 shape = SubResource("RectangleShape2D_4a4a8")
 
 [node name="ExpirationTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 35.0
 one_shot = true
 autostart = true
 

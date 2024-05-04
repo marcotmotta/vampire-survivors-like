@@ -1,15 +1,24 @@
 extends CharacterBody2D
 
-var upgrades = [
-	{
+var upgrades = {
+	'fireball': {
 		'upgrade': 'fireball',
+		'scene': preload("res://Weapons/Fireball/Fireball.tscn"),
+		'icon': preload("res://Weapons/fireball_icon.png"),
 		'callable': Callable(self, 'get_weapon_fireball'),
 		'type': 'weapon',
 		'label': 'FIREBALL // NEW WEAPON',
-		'icon': preload("res://Weapons/fireball_icon.png"),
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 1,
+		'stats': {
+			'damage': 10,
+			'base_cooldown': 2, # seconds
+			'bonus_cooldown': 0, # percentage (0 - 1)
+			'current_cooldown': 2, # starts with the value of base_cooldown
+			'count': 1,
+			'damage_dealt': 0,
+		},
 		'upgrades': [
 			{ # + atk count
 				'callable': Callable(self, 'upgrade_atk_count_fireball'),
@@ -29,15 +38,24 @@ var upgrades = [
 			}
 		]
 	},
-	{
+	'thunder': {
 		'upgrade': 'thunder',
+		'scene': preload("res://Weapons/Thunder/Thunder.tscn"),
+		'icon': preload("res://Weapons/thunder_icon.png"),
 		'callable': Callable(self, 'get_weapon_thunder'),
 		'type': 'weapon',
 		'label': 'THUNDER // NEW WEAPON',
-		'icon': preload("res://Weapons/thunder_icon.png"),
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
+		'stats': {
+			'damage': 15,
+			'base_cooldown': 2.8, # seconds
+			'bonus_cooldown': 0, # percentage (0 - 1)
+			'current_cooldown': 2.8, # starts with the value of base_cooldown
+			'count': 1,
+			'damage_dealt': 0,
+		},
 		'upgrades': [
 			{ # + atk count
 				'callable': Callable(self, 'upgrade_atk_count_thunder'),
@@ -57,15 +75,24 @@ var upgrades = [
 			}
 		]
 	},
-	{
+	'laser': {
 		'upgrade': 'laser',
+		'scene': preload("res://Weapons/Laser/Laser.tscn"),
+		'icon': preload("res://Weapons/laser_icon.png"),
 		'callable': Callable(self, 'get_weapon_laser'),
 		'type': 'weapon',
 		'label': 'LASER // NEW WEAPON',
-		'icon': preload("res://Weapons/laser_icon.png"),
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
+		'stats': {
+			'damage': 10,
+			'base_cooldown': 3, # seconds
+			'bonus_cooldown': 0, # percentage (0 - 1)
+			'current_cooldown': 3, # starts with the value of base_cooldown
+			'count': 1,
+			'damage_dealt': 0,
+		},
 		'upgrades': [
 			{ # + atk count
 				'callable': Callable(self, 'upgrade_atk_count_laser'),
@@ -85,15 +112,24 @@ var upgrades = [
 			}
 		]
 	},
-	{
+	'void': {
 		'upgrade': 'void',
+		'scene': preload("res://Weapons/Void/Void.tscn"),
+		'icon': preload("res://Weapons/void_icon.png"),
 		'callable': Callable(self, 'get_weapon_void'),
 		'type': 'weapon',
 		'label': 'VOID // NEW WEAPON',
-		'icon': preload("res://Weapons/void_icon.png"),
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
+		'stats': {
+			'damage': 6,
+			'base_cooldown': 7, # seconds
+			'bonus_cooldown': 0, # percentage (0 - 1)
+			'current_cooldown': 7, # starts with the value of base_cooldown
+			'aoe': 0,
+			'damage_dealt': 0,
+		},
 		'upgrades': [
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_void'),
@@ -113,15 +149,25 @@ var upgrades = [
 			}
 		]
 	},
-	{
+	'poison': {
 		'upgrade': 'poison',
+		'scene': preload("res://Weapons/Poison/Poison.tscn"),
+		'icon': preload("res://Weapons/poison_icon.png"),
 		'callable': Callable(self, 'get_weapon_poison'),
 		'type': 'weapon',
 		'label': 'POISON // NEW WEAPON',
-		'icon': preload("res://Weapons/poison_icon.png"),
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
+		'stats': {
+			'damage': 6,
+			'base_cooldown': 6, # seconds
+			'bonus_cooldown': 0, # percentage (0 - 1)
+			'current_cooldown': 6, # starts with the value of base_cooldown
+			'aoe': 0,
+			'count': 1,
+			'damage_dealt': 0,
+		},
 		'upgrades': [
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_poison'),
@@ -149,7 +195,7 @@ var upgrades = [
 			},
 		]
 	},
-	{
+	'atk_damage': {
 		'upgrade': 'atk_damage',
 		'callable': Callable(self, 'upgrade_atk_damage_all'),
 		'type': 'buff',
@@ -159,7 +205,7 @@ var upgrades = [
 		'max_level': 5,
 		'current_level': 0
 	},
-	{
+	'atk_speed': {
 		'upgrade': 'atk_speed',
 		'callable': Callable(self, 'upgrade_atk_speed_all'),
 		'type': 'buff',
@@ -169,7 +215,7 @@ var upgrades = [
 		'max_level': 8,
 		'current_level': 0
 	},
-	{
+	'atk_count': {
 		'upgrade': 'atk_count',
 		'callable': Callable(self, 'upgrade_atk_count_all'),
 		'type': 'buff',
@@ -179,7 +225,7 @@ var upgrades = [
 		'max_level': 2,
 		'current_level': 0
 	},
-	{
+	'health': {
 		'upgrade': 'health',
 		'callable': Callable(self, 'upgrade_health'),
 		'type': 'buff',
@@ -189,7 +235,7 @@ var upgrades = [
 		'max_level': 5,
 		'current_level': 0
 	},
-	{
+	'move_speed': {
 		'upgrade': 'move_speed',
 		'callable': Callable(self, 'upgrade_move_speed'),
 		'type': 'buff',
@@ -199,7 +245,7 @@ var upgrades = [
 		'max_level': 999, # FIXME: debug purposes - change to 4
 		'current_level': 0
 	},
-]
+}
 
 # sounds
 var sound_scene = preload("res://SFX/Sound.tscn")
@@ -222,57 +268,6 @@ var health = MAX_HEALTH
 # movement speed logic
 var base_speed = 100
 var current_speed = base_speed
-
-# fireball logic
-var fireball_scene = preload("res://Weapons/Fireball/Fireball.tscn")
-var fireball_icon = preload("res://Weapons/fireball_icon.png")
-var fireball_damage = 10
-var base_fireball_cooldown = 2 # seconds
-var bonus_fireball_cooldown = 0 # percentage (0 - 1)
-var current_fireball_cooldown = base_fireball_cooldown
-var fireball_count = 1
-var fireball_damage_dealt = 0
-
-# thunder logic
-var thunder_scene = preload("res://Weapons/Thunder/Thunder.tscn")
-var thunder_icon = preload("res://Weapons/thunder_icon.png")
-var thunder_damage = 15
-var base_thunder_cooldown = 2.8 # seconds
-var bonus_thunder_cooldown = 0 # percentage (0 - 1)
-var current_thunder_cooldown = base_thunder_cooldown
-var thunder_count = 1
-var thunder_damage_dealt = 0
-
-# laser logic
-var laser_scene = preload("res://Weapons/Laser/Laser.tscn")
-var laser_icon = preload("res://Weapons/laser_icon.png")
-var laser_damage = 10
-var base_laser_cooldown = 3 # seconds
-var bonus_laser_cooldown = 0 # percentage (0 - 1)
-var current_laser_cooldown = base_laser_cooldown
-var laser_count = 1
-var laser_damage_dealt = 0
-
-# void logic
-var void_scene = preload("res://Weapons/Void/Void.tscn")
-var void_icon = preload("res://Weapons/void_icon.png")
-var void_damage = 6
-var base_void_cooldown = 7 # seconds
-var bonus_void_cooldown = 0 # percentage (0 - 1)
-var current_void_cooldown = base_void_cooldown
-var void_aoe = 0
-var void_damage_dealt = 0
-
-# poison logic
-var poison_scene = preload("res://Weapons/Poison/Poison.tscn")
-var poison_icon = preload("res://Weapons/poison_icon.png")
-var poison_damage = 6
-var base_poison_cooldown = 6 # seconds
-var bonus_poison_cooldown = 0 # percentage (0 - 1)
-var current_poison_cooldown = base_poison_cooldown
-var poison_aoe = 0
-var poison_count = 1
-var poison_damage_dealt = 0
 
 # exp and leveling
 # exp needed to level = base_exp + current_level * exp_level_ratio
@@ -308,7 +303,7 @@ func play_sound(scene, sound):
 	get_parent().add_child(sound_instance)
 
 func calculate_weapon_level(weapon):
-	var upgrade = upgrades.filter(func(u): return u.upgrade == weapon)[0]
+	var upgrade = upgrades[weapon]
 	var sum_max_level = upgrade.max_level
 	sum_max_level = upgrade.upgrades.reduce(func(accum, u): return accum + u.max_level, sum_max_level)
 	var sum_current_level = upgrade.current_level
@@ -316,6 +311,7 @@ func calculate_weapon_level(weapon):
 	return {'sum_max_level': sum_max_level, 'sum_current_level': sum_current_level}
 
 func calculate_icon_position():
+	# weapon icons display
 	for i in range(weapon_icons.size()):
 		var icon = $CanvasLayer/Control.get_node(weapon_icons[i] + 'Icon')
 		icon.position = Vector2(20 + i * 60, 20)
@@ -328,12 +324,13 @@ func calculate_icon_position():
 		label.position = Vector2(20 + i * 60, 70)
 		label.visible = true
 
+	# buff icons display
 	for i in range(buff_icons.size()):
 		var icon = $CanvasLayer/Control.get_node(buff_icons[i] + 'Icon')
 		icon.position = Vector2(20 + i * 50, 110)
 		icon.visible = true
 		var label = $CanvasLayer/Control.get_node(buff_icons[i] + 'Label')
-		var upgrade = upgrades.filter(func(u): return u.upgrade == buff_icons[i])[0]
+		var upgrade = upgrades[buff_icons[i]]
 		label.text = str(upgrade.current_level)
 		if upgrade.current_level >= upgrade.max_level:
 			label.label_settings.font_color = 'ffd600'
@@ -350,11 +347,11 @@ func _process(delta):
 	$CanvasLayer/Control/ExpBar.value = current_exp
 
 	# canculte atk speed and cooldown
-	current_fireball_cooldown = base_fireball_cooldown * (1 - bonus_fireball_cooldown)
-	current_thunder_cooldown = base_thunder_cooldown * (1 - bonus_thunder_cooldown)
-	current_laser_cooldown = base_laser_cooldown * (1 - bonus_laser_cooldown)
-	current_void_cooldown = base_void_cooldown * (1 - bonus_void_cooldown)
-	current_poison_cooldown = base_poison_cooldown * (1 - bonus_poison_cooldown)
+	upgrades.fireball.stats.current_cooldown = upgrades.fireball.stats.base_cooldown * (1 - upgrades.fireball.stats.bonus_cooldown)
+	upgrades.thunder.stats.current_cooldown = upgrades.thunder.stats.base_cooldown * (1 - upgrades.thunder.stats.bonus_cooldown)
+	upgrades.laser.stats.current_cooldown = upgrades.laser.stats.base_cooldown * (1 - upgrades.laser.stats.bonus_cooldown)
+	upgrades.void.stats.current_cooldown = upgrades.void.stats.base_cooldown * (1 - upgrades.void.stats.bonus_cooldown)
+	upgrades.poison.stats.current_cooldown = upgrades.poison.stats.base_cooldown * (1 - upgrades.poison.stats.bonus_cooldown)
 
 	# icons
 	calculate_icon_position()
@@ -366,23 +363,23 @@ func _process(delta):
 	#stats += '\n'
 	#stats += 'health: ' + str(health) + '\n'
 	#stats += 'movement speed: ' + str(current_speed) + '\n'
-	#stats += 'fireball cd: ' + str(current_fireball_cooldown) + '\n'
-	#stats += 'fireball count: ' + str(fireball_count) + '\n'
-	#stats += 'thunder cd: ' + str(current_thunder_cooldown) + '\n'
-	#stats += 'thunder count: ' + str(thunder_count) + '\n'
-	#stats += 'laser cd: ' + str(current_laser_cooldown) + '\n'
-	#stats += 'laser count: ' + str(laser_count) + '\n'
-	#stats += 'void cd: ' + str(current_void_cooldown) + '\n'
+	#stats += 'fireball cd: ' + str(upgrades.fireball.stats.current_cooldown) + '\n'
+	#stats += 'fireball count: ' + str(upgrades.fireball.stats.count) + '\n'
+	#stats += 'thunder cd: ' + str(upgrades.thunder.stats.current_cooldown) + '\n'
+	#stats += 'thunder count: ' + str(upgrades.thunder.stats.count) + '\n'
+	#stats += 'laser cd: ' + str(upgrades.laser.stats.current_cooldown) + '\n'
+	#stats += 'laser count: ' + str(upgrades.laser.stats.count) + '\n'
+	#stats += 'void cd: ' + str(upgrades.void.stats.current_cooldown) + '\n'
 
 	$CanvasLayer/Control/StatsLabel.text = stats
 
 	# show damage dealt
 	var damage_dealt = ''
-	damage_dealt += 'Fireball: ' + str(fireball_damage_dealt) + '\n'
-	damage_dealt += 'Thunder: ' + str(thunder_damage_dealt) + '\n'
-	damage_dealt += 'Laser: ' + str(laser_damage_dealt) + '\n'
-	damage_dealt += 'Void: ' + str(void_damage_dealt) + '\n'
-	damage_dealt += 'Poison: ' + str(poison_damage_dealt) + '\n'
+	damage_dealt += 'Fireball: ' + str(upgrades.fireball.stats.damage_dealt) + '\n'
+	damage_dealt += 'Thunder: ' + str(upgrades.thunder.stats.damage_dealt) + '\n'
+	damage_dealt += 'Laser: ' + str(upgrades.laser.stats.damage_dealt) + '\n'
+	damage_dealt += 'Void: ' + str(upgrades.void.stats.damage_dealt) + '\n'
+	damage_dealt += 'Poison: ' + str(upgrades.poison.stats.damage_dealt) + '\n'
 
 	$CanvasLayer/Control/PauseUI/DamageDealtLabel.text = damage_dealt
 
@@ -422,63 +419,63 @@ func _get_random_enemy():
 # weapon hit triggers
 func _on_fireball_timer_timeout():
 	var closest_enemy = _get_closest_enemy()
-	$FireballTimer.start(current_fireball_cooldown)
+	$FireballTimer.start(upgrades.fireball.stats.current_cooldown)
 	if closest_enemy.enemy:
-		for i in range(fireball_count):
+		for i in range(upgrades.fireball.stats.count):
 			var shift = 0 if i == 0 else randi_range(-20, 20)
-			var fireball_instance = fireball_scene.instantiate()
+			var fireball_instance = upgrades.fireball.scene.instantiate()
 			fireball_instance.global_position = global_position
 			fireball_instance.direction = closest_enemy.direction.rotated(deg_to_rad(shift))
-			fireball_instance.damage = fireball_damage
+			fireball_instance.damage = upgrades.fireball.stats.damage
 			var sums = calculate_weapon_level('fireball')
 			fireball_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(fireball_instance)
 			await get_tree().create_timer(0.05).timeout
 
 func _on_thunder_timer_timeout():
-	$ThunderTimer.start(current_thunder_cooldown)
-	for i in range(thunder_count):
+	$ThunderTimer.start(upgrades.thunder.stats.current_cooldown)
+	for i in range(upgrades.thunder.stats.count):
 		var selected_enemy = _get_random_enemy()
 		if selected_enemy.enemy:
-			var thunder_instance = thunder_scene.instantiate()
+			var thunder_instance = upgrades.thunder.scene.instantiate()
 			thunder_instance.global_position = selected_enemy.enemy.global_position
-			thunder_instance.damage = thunder_damage
+			thunder_instance.damage = upgrades.thunder.stats.damage
 			var sums = calculate_weapon_level('thunder')
 			thunder_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(thunder_instance)
 			await get_tree().create_timer(0.10).timeout
 
 func _on_laser_timer_timeout():
-	$LaserTimer.start(current_laser_cooldown)
-	for i in range(laser_count):
+	$LaserTimer.start(upgrades.laser.stats.current_cooldown)
+	for i in range(upgrades.laser.stats.count):
 		var selected_enemy = _get_random_enemy()
 		if selected_enemy.enemy:
-			var laser_instance = laser_scene.instantiate()
+			var laser_instance = upgrades.laser.scene.instantiate()
 			laser_instance.direction = selected_enemy.direction
-			laser_instance.damage = laser_damage
+			laser_instance.damage = upgrades.laser.stats.damage
 			var sums = calculate_weapon_level('laser')
 			laser_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			add_child(laser_instance)
 			await get_tree().create_timer(0.15).timeout
 
 func _on_void_timer_timeout():
-	$VoidTimer.start(current_void_cooldown)
-	var void_instance = void_scene.instantiate()
-	void_instance.damage = void_damage
-	void_instance.aoe = void_aoe
+	$VoidTimer.start(upgrades.void.stats.current_cooldown)
+	var void_instance = upgrades.void.scene.instantiate()
+	void_instance.damage = upgrades.void.stats.damage
+	void_instance.aoe = upgrades.void.stats.aoe
 	var sums = calculate_weapon_level('void')
 	void_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 	add_child(void_instance)
 
 func _on_poison_timer_timeout():
-	$PoisonTimer.start(current_poison_cooldown)
-	for i in range(poison_count):
+	$PoisonTimer.start(upgrades.poison.stats.current_cooldown)
+	for i in range(upgrades.poison.stats.count):
 		var selected_enemy = _get_random_enemy()
 		if selected_enemy.enemy:
-			var poison_instance = poison_scene.instantiate()
+			var poison_instance = upgrades.poison.scene.instantiate()
 			poison_instance.global_position = ((selected_enemy.enemy.global_position - global_position) / 1.3) + global_position
-			poison_instance.damage = poison_damage
-			poison_instance.aoe = poison_aoe
+			poison_instance.damage = upgrades.poison.stats.damage
+			poison_instance.aoe = upgrades.poison.stats.aoe
 			var sums = calculate_weapon_level('poison')
 			poison_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(poison_instance)
@@ -501,8 +498,8 @@ func take_damage(amount):
 func _get_upgrades():
 	var upgrade_count = 3
 
-	var primary_upgrades = upgrades.filter(func(u): return u.current_level < u.max_level)
-	var variant_upgrades = upgrades.filter(func(u): return u.type == 'weapon' and u.has('upgrades') and u.upgrades.any(func(v): return v.current_level < v.max_level))
+	var primary_upgrades = upgrades.values().filter(func(u): return u.current_level < u.max_level)
+	var variant_upgrades = upgrades.values().filter(func(u): return u.type == 'weapon' and u.has('upgrades') and u.upgrades.any(func(v): return v.current_level < v.max_level))
 	var filtered_variant_upgrades = []
 	for v in variant_upgrades:
 		if not v.current_level < v.max_level:
@@ -561,19 +558,19 @@ func get_exp(amount):
 
 # upgrade functions
 func upgrade_atk_damage_fireball():
-	fireball_damage += 1
+	upgrades.fireball.stats.damage += 1
 
 func upgrade_atk_damage_thunder():
-	thunder_damage += 1
+	upgrades.thunder.stats.damage += 1
 
 func upgrade_atk_damage_laser():
-	laser_damage += 1
+	upgrades.laser.stats.damage += 1
 
 func upgrade_atk_damage_void():
-	void_damage += 2
+	upgrades.void.stats.damage += 2
 
 func upgrade_atk_damage_poison():
-	poison_damage += 2
+	upgrades.poison.stats.damage += 2
 
 func upgrade_atk_damage_all():
 	if not buff_icons.has('atk_damage'):
@@ -589,24 +586,24 @@ func upgrade_atk_speed_all():
 		buff_icons.append('atk_speed')
 	# everything here is dealt in percentage,
 	# since the variables bonus_<weapon>_cooldown is a percentage from 0 to 1
-	# i.e. "bonus_fireball_cooldown + 0.05" will increase atk speed of fireballs by 5%
-	bonus_fireball_cooldown = bonus_fireball_cooldown + 0.05
-	bonus_thunder_cooldown = bonus_thunder_cooldown + 0.05
-	bonus_laser_cooldown = bonus_laser_cooldown + 0.05
-	bonus_void_cooldown = bonus_void_cooldown + 0.05
-	bonus_poison_cooldown = bonus_poison_cooldown + 0.05
+	# i.e. "upgrades.fireball.stats.bonus_cooldown + 0.05" will increase atk speed of fireballs by 5%
+	upgrades.fireball.stats.bonus_cooldown += 0.05
+	upgrades.thunder.stats.bonus_cooldown += 0.05
+	upgrades.laser.stats.bonus_cooldown += 0.05
+	upgrades.void.stats.bonus_cooldown += 0.05
+	upgrades.poison.stats.bonus_cooldown += 0.05
 
 func upgrade_atk_count_fireball():
-	fireball_count += 1
+	upgrades.fireball.stats.count += 1
 
 func upgrade_atk_count_thunder():
-	thunder_count += 1
+	upgrades.thunder.stats.count += 1
 
 func upgrade_atk_count_laser():
-	laser_count += 1
+	upgrades.laser.stats.count += 1
 
 func upgrade_atk_count_poison():
-	poison_count += 1
+	upgrades.poison.stats.count += 1
 
 func upgrade_atk_count_all():
 	if not buff_icons.has('atk_count'):
@@ -617,10 +614,10 @@ func upgrade_atk_count_all():
 	upgrade_atk_count_poison()
 
 func upgrade_aoe_void():
-	void_aoe += 1
+	upgrades.void.stats.aoe += 1
 
 func upgrade_aoe_poison():
-	poison_aoe += 1
+	upgrades.poison.stats.aoe += 1
 
 func upgrade_health():
 	if not buff_icons.has('health'):
@@ -635,15 +632,15 @@ func upgrade_move_speed():
 	current_speed = min(current_speed + 20, 200)
 
 func get_weapon_fireball():
-	$FireballTimer.start(current_thunder_cooldown)
+	$FireballTimer.start(upgrades.fireball.stats.current_cooldown)
 	weapon_icons.append('fireball')
 
 func get_weapon_thunder():
-	$ThunderTimer.start(current_thunder_cooldown)
+	$ThunderTimer.start(upgrades.thunder.stats.current_cooldown)
 	weapon_icons.append('thunder')
 
 func get_weapon_laser():
-	$LaserTimer.start(current_laser_cooldown)
+	$LaserTimer.start(upgrades.laser.stats.current_cooldown)
 	weapon_icons.append('laser')
 
 func get_weapon_void():
