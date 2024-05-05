@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=36 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
+[ext_resource type="Script" path="res://Player/EndUI.gd" id="3_0e1w3"]
 [ext_resource type="Texture2D" uid="uid://ddnvk3n3b4yxg" path="res://Weapons/poison_icon.png" id="4_62vww"]
 [ext_resource type="Script" path="res://Player/PauseUI.gd" id="4_smkue"]
 
@@ -105,6 +106,11 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.8, 0, 0.8, 1)
 border_blend = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_a7snn"]
+font_size = 20
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_l3iak"]
 font_size = 20
@@ -325,6 +331,58 @@ text = "Continue"
 layout_mode = 2
 text = "Exit"
 
+[node name="EndUI" type="Control" parent="CanvasLayer/Control"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_0e1w3")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/EndUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="RecordLevel" type="Label" parent="CanvasLayer/Control/EndUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Level: 100"
+label_settings = SubResource("LabelSettings_a7snn")
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="CanvasLayer/Control/EndUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = 84.5
+offset_right = 22.5
+offset_bottom = 115.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+
 [node name="KillsLabel" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 735.0
@@ -508,6 +566,7 @@ one_shot = true
 [connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/PauseUI/PauseButtons/ContinueButton" to="CanvasLayer/Control/PauseUI" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/PauseUI/PauseButtons/ExitButton" to="CanvasLayer/Control/PauseUI" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/EndUI/Back" to="CanvasLayer/Control/EndUI" method="_on_back_pressed"]
 [connection signal="timeout" from="FireballTimer" to="." method="_on_fireball_timer_timeout"]
 [connection signal="timeout" from="ThunderTimer" to="." method="_on_thunder_timer_timeout"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]

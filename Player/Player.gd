@@ -496,7 +496,7 @@ func take_damage(amount):
 
 	upgrades.health.stats.current -= amount
 	if upgrades.health.stats.current <= 0:
-		get_tree().change_scene_to_file("res://Menu.tscn")
+		$CanvasLayer/Control/EndUI.end(true)
 
 # leveling functions
 func _get_upgrades():
@@ -549,6 +549,10 @@ func level_up():
 	play_sound(fixed_sound_scene, level_up_sound)
 
 	current_level += 1
+	if current_level >= 80:
+		$CanvasLayer/Control/EndUI.end(false)
+		return
+
 	_get_upgrades()
 	$CanvasLayer/Control/UpgradeList.visible = true
 	upgrading = true
