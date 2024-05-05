@@ -24,7 +24,7 @@ func _process(delta):
 	while $RayCast.is_colliding():
 		var body = $RayCast.get_collider()
 		if body and body.is_in_group('enemy'):
-			body.take_damage('laser', damage)
+			body.take_damage('laser', ceil(damage))
 		$RayCast.add_exception(body)
 		$RayCast.force_raycast_update()
 

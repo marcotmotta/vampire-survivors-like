@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://duvksxp4rhhvr"]
+
+[ext_resource type="Script" path="res://Enemies/BigMiniBoss/BigMiniBossEnemy.gd" id="1_daydr"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpbwx"]
+load_path = "res://.godot/imported/golem.png-11b7c5f8337cc70144c6bbb72d5a404e.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqoqb"]
+size = Vector2(45, 45)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdco5"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0sw7w"]
+size = Vector2(48, 48)
+
+[node name="BigMiniBossEnemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_daydr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(2.8, 2.8)
+texture = SubResource("CompressedTexture2D_gpbwx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lqoqb")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_pdco5")
+value = 50.0
+show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_0sw7w")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
