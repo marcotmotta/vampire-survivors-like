@@ -233,7 +233,11 @@ var upgrades = {
 		'icon': preload("res://Weapons/health_icon.png"),
 		'rarity': 1,
 		'max_level': 5,
-		'current_level': 0
+		'current_level': 0,
+		'stats': {
+			'max': 100,
+			'current': 100
+		}
 	},
 	'move_speed': {
 		'upgrade': 'move_speed',
@@ -243,9 +247,16 @@ var upgrades = {
 		'icon': preload("res://Weapons/move_speed_icon.png"),
 		'rarity': 1,
 		'max_level': 999, # FIXME: debug purposes - change to 4
-		'current_level': 0
+		'current_level': 0,
+		'stats': {
+			'current': 100
+		}
 	},
 }
+
+# player model
+var player_model_scene = preload("res://Player/PlayerModel.tscn")
+var animated_player
 
 # sounds
 var sound_scene = preload("res://SFX/Sound.tscn")
@@ -261,14 +272,6 @@ var buttons = [{},{},{}]
 var weapon_icons = []
 var buff_icons = []
 
-# health
-var MAX_HEALTH = 100
-var health = MAX_HEALTH
-
-# movement speed logic
-var base_speed = 100
-var current_speed = base_speed
-
 # exp and leveling
 # exp needed to level = base_exp + current_level * exp_level_ratio
 var current_level = 1
@@ -283,13 +286,25 @@ var upgrading = false
 func _ready():
 	randomize()
 
+	# FIXME: i dont like this at all, maybe theres a better way with just one "animatedsprite"
+	# select player model
+	var player_model_instance = player_model_scene.instantiate()
+	animated_player = player_model_instance.get_node(Globals.current_color)
+	animated_player.visible = true
+	add_child(player_model_instance)
+
 	# FIXME: set the starting weapon. debug purposes
 	get_weapon_fireball()
 	#get_weapon_poison()
 
 func get_input():
 	var input_direction = Input.get_vector("a", "d", "w", "s")
-	velocity = input_direction * current_speed
+	velocity = input_direction * upgrades.move_speed.stats.current
+
+	if velocity:
+		animated_player.play('run')
+	else:
+		animated_player.play('idle')
 
 func _physics_process(delta):
 	get_input()
@@ -339,8 +354,8 @@ func calculate_icon_position():
 
 func _process(delta):
 	# health bar
-	$HealthBar.max_value = MAX_HEALTH
-	$HealthBar.value = health
+	$HealthBar.max_value = upgrades.health.stats.max
+	$HealthBar.value = upgrades.health.stats.current
 
 	# exp bar
 	$CanvasLayer/Control/ExpBar.max_value = base_exp + current_level * exp_level_ratio
@@ -361,8 +376,8 @@ func _process(delta):
 	stats += 'Lv ' + str(current_level) + '\n'
 	#stats += 'exp: ' + str(current_exp) + '/' + str(base_exp + current_level * exp_level_ratio) + '\n'
 	#stats += '\n'
-	#stats += 'health: ' + str(health) + '\n'
-	#stats += 'movement speed: ' + str(current_speed) + '\n'
+	#stats += 'health: ' + str(upgrades.health.stats.current) + '\n'
+	#stats += 'movement speed: ' + str(upgrades.move_speed.stats.current) + '\n'
 	#stats += 'fireball cd: ' + str(upgrades.fireball.stats.current_cooldown) + '\n'
 	#stats += 'fireball count: ' + str(upgrades.fireball.stats.count) + '\n'
 	#stats += 'thunder cd: ' + str(upgrades.thunder.stats.current_cooldown) + '\n'
@@ -485,13 +500,13 @@ func _on_poison_timer_timeout():
 func heal(amount):
 	play_sound(sound_scene, heal_sound)
 
-	health = min(health + amount, MAX_HEALTH)
+	upgrades.health.stats.current = min(upgrades.health.stats.current + amount, upgrades.health.stats.max)
 
 func take_damage(amount):
 	play_sound(sound_scene, hurt_sound)
 
-	health -= amount
-	if health <= 0:
+	upgrades.health.stats.current -= amount
+	if upgrades.health.stats.current <= 0:
 		get_tree().change_scene_to_file("res://Menu.tscn")
 
 # leveling functions
@@ -622,14 +637,14 @@ func upgrade_aoe_poison():
 func upgrade_health():
 	if not buff_icons.has('health'):
 		buff_icons.append('health')
-	MAX_HEALTH += 20
-	health = min(health + 20, MAX_HEALTH)
+	upgrades.health.stats.max += 20
+	upgrades.health.stats.current = min(upgrades.health.stats.current + 20, upgrades.health.stats.max)
 
 func upgrade_move_speed():
 	if not buff_icons.has('move_speed'):
 		buff_icons.append('move_speed')
 	# FIXME: remove the min. debug purposes
-	current_speed = min(current_speed + 20, 200)
+	upgrades.move_speed.stats.current = min(upgrades.move_speed.stats.current + 20, 200)
 
 func get_weapon_fireball():
 	$FireballTimer.start(upgrades.fireball.stats.current_cooldown)

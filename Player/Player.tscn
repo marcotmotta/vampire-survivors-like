@@ -1,12 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=34 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
-[ext_resource type="Texture2D" uid="uid://caokgvcwy75nw" path="res://icon.svg" id="2_apd22"]
 [ext_resource type="Texture2D" uid="uid://ddnvk3n3b4yxg" path="res://Weapons/poison_icon.png" id="4_62vww"]
 [ext_resource type="Script" path="res://Player/PauseUI.gd" id="4_smkue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45sbc"]
-size = Vector2(36, 36)
+size = Vector2(36, 45)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc1o4"]
 bg_color = Color(1, 0, 0, 1)
@@ -193,11 +192,8 @@ outline_color = Color(0, 0, 0, 1)
 z_index = 1
 script = ExtResource("1_brsg7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.28, 0.28)
-texture = ExtResource("2_apd22")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_45sbc")
 
 [node name="HealthBar" type="ProgressBar" parent="."]

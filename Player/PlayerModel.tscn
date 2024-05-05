@@ -1,0 +1,173 @@
+[gd_scene load_steps=22 format=3 uid="uid://bitoab84jtokl"]
+
+[ext_resource type="Texture2D" uid="uid://ce8enkwy3pyx6" path="res://Player/black_player.png" id="1_jmsdf"]
+[ext_resource type="Texture2D" uid="uid://ciem7eu6qh2bk" path="res://Player/red_player.png" id="2_h6r3g"]
+[ext_resource type="Texture2D" uid="uid://lopmqsvu6nin" path="res://Player/blue_player.png" id="3_2jv78"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cntq"]
+atlas = ExtResource("1_jmsdf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cin6"]
+atlas = ExtResource("1_jmsdf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttd36"]
+atlas = ExtResource("1_jmsdf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41m6c"]
+atlas = ExtResource("1_jmsdf")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3jwu"]
+atlas = ExtResource("1_jmsdf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2m732"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5cntq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cin6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttd36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41m6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3jwu")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o5jk"]
+atlas = ExtResource("2_h6r3g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5vtw"]
+atlas = ExtResource("2_h6r3g")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qv0g"]
+atlas = ExtResource("2_h6r3g")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ryms"]
+atlas = ExtResource("2_h6r3g")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlqco"]
+atlas = ExtResource("2_h6r3g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xsmmp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o5jk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5vtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qv0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ryms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlqco")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th47i"]
+atlas = ExtResource("3_2jv78")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2lu3"]
+atlas = ExtResource("3_2jv78")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifkb5"]
+atlas = ExtResource("3_2jv78")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46x22"]
+atlas = ExtResource("3_2jv78")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4287"]
+atlas = ExtResource("3_2jv78")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5q8q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th47i")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2lu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifkb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46x22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4287")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="PlayerModel" type="Node2D"]
+
+[node name="black" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_2m732")
+animation = &"run"
+frame_progress = 0.435789
+
+[node name="red" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_xsmmp")
+animation = &"run"
+frame_progress = 0.407732
+
+[node name="blue" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_5q8q2")
+animation = &"run"
+frame = 1
+frame_progress = 0.756127

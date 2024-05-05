@@ -15,6 +15,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorSelector" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -124.0
+offset_right = 22.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left" type="Button" parent="CanvasLayer/Control/ColorSelector"]
+layout_mode = 2
+text = "<"
+
+[node name="Color" type="ColorRect" parent="CanvasLayer/Control/ColorSelector"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+
+[node name="Right" type="Button" parent="CanvasLayer/Control/ColorSelector"]
+layout_mode = 2
+text = ">"
+
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 8
@@ -30,4 +58,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "PLAY"
 
+[connection signal="pressed" from="CanvasLayer/Control/ColorSelector/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/ColorSelector/Right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
