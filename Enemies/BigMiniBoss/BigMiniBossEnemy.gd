@@ -1,8 +1,8 @@
 extends "../Enemy.gd"
 
 func set_stats():
-	MAX_HEALTH = 350
-	health = 350
+	MAX_HEALTH = 1000
+	health = 1000
 	speed = 50
 	damage = 30
-	exp = 8
+	exp = 9
