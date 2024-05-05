@@ -106,15 +106,6 @@ func enemy_died(exp):
 		chance_big_mini_boss_enemy = 0.05
 		chance_multiple_enemies = 1
 		multiple_enemies_count = 10
-	# up to level 8 at level 70
-	elif enemy_spawn_level <= 7 and get_node('Player').current_level >= 70:
-		enemy_spawn_level += 1
-		chance_big_enemy = 0.1
-		chance_small_enemy = 0.1
-		chance_mini_boss_enemy = 0.1
-		chance_big_mini_boss_enemy = 0.6
-		chance_multiple_enemies = 1
-		multiple_enemies_count = 10
 
 	# reduce enemy spawn timer
 	enemy_spawn_timer = max(enemy_spawn_timer - 0.05, minimum_spawn_time)

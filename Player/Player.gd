@@ -552,7 +552,7 @@ func level_up():
 	play_sound(fixed_sound_scene, level_up_sound)
 
 	current_level += 1
-	if current_level >= 80:
+	if current_level >= 70:
 		$CanvasLayer/Control/EndUI.end(false)
 		return
 
