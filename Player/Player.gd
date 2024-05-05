@@ -353,6 +353,9 @@ func calculate_icon_position():
 		label.visible = true
 
 func _process(delta):
+	# fps
+	$CanvasLayer/Control/FpsLabel.text = 'FPS: ' + str(Engine.get_frames_per_second())
+
 	# health bar
 	$HealthBar.max_value = upgrades.health.stats.max
 	$HealthBar.value = upgrades.health.stats.current

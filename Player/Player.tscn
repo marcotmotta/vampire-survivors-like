@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=37 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
 [ext_resource type="Script" path="res://Player/EndUI.gd" id="3_0e1w3"]
@@ -191,6 +191,11 @@ load_path = "res://.godot/imported/move_speed_icon.png-bf3252a3455f67f039a57d310
 
 [sub_resource type="LabelSettings" id="LabelSettings_33t6d"]
 font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dwdjn"]
+font_size = 10
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
@@ -542,6 +547,22 @@ offset_bottom = 23.0
 text = "100"
 label_settings = SubResource("LabelSettings_33t6d")
 horizontal_alignment = 1
+
+[node name="FpsLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "FPS: 100"
+label_settings = SubResource("LabelSettings_dwdjn")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FireballTimer" type="Timer" parent="."]
 one_shot = true

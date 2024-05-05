@@ -20,6 +20,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Background" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.572549, 0.666667, 0.831373, 1)
+
 [node name="ColorSelector" type="HBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 8
