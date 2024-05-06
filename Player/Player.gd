@@ -49,10 +49,10 @@ var upgrades = {
 		'max_level': 1,
 		'current_level': 0,
 		'stats': {
-			'damage': 15,
-			'base_cooldown': 2.8, # seconds
+			'damage': 20,
+			'base_cooldown': 2.5, # seconds
 			'bonus_cooldown': 0, # percentage (0 - 1)
-			'current_cooldown': 2.8, # starts with the value of base_cooldown
+			'current_cooldown': 2.5, # starts with the value of base_cooldown
 			'count': 1,
 			'damage_dealt': 0,
 		},

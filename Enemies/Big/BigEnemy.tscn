@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1t3x6d4uibbt"]
+[gd_scene load_steps=7 format=3 uid="uid://d1t3x6d4uibbt"]
 
 [ext_resource type="Script" path="res://Enemies/Big/BigEnemy.gd" id="1_luh54"]
 [ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_107hs"]
@@ -6,11 +6,26 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1u6c"]
 size = Vector2(34, 34)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw4g8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1omo8"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jfac"]
 bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nstb7"]
-size = Vector2(38, 38)
+size = Vector2(36, 36)
 
 [node name="BigEnemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_luh54")
@@ -34,7 +49,8 @@ offset_right = 20.0
 offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_tw4g8")
+theme_override_styles/background = SubResource("StyleBoxFlat_1omo8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4jfac")
 value = 50.0
 show_percentage = false
 

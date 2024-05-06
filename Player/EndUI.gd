@@ -16,9 +16,9 @@ func end(died = false):
 			$RecordLevel.text = 'YOU WON\n\nNEW RECORD!\nLevel\n' + str(Globals.record_level)
 	else:
 		if died:
-			$RecordLevel.text = 'YOU DIED\n\nLevel\n' + str(Globals.record_level)
+			$RecordLevel.text = 'YOU DIED\n\nLevel\n' + str(player.current_level)
 		else:
-			$RecordLevel.text = 'YOU WON\n\nLevel\n' + str(Globals.record_level)
+			$RecordLevel.text = 'YOU WON\n\nLevel\n' + str(player.current_level)
 
 func _on_back_pressed():
 	get_tree().paused = false

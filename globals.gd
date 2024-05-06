@@ -4,7 +4,8 @@ extends Node
 var colors = [
 	'black',
 	'red',
-	'blue'
+	'blue',
+	'gold'
 ]
 
 var current_color_idx = 0

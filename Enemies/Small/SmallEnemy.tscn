@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxq5dbfe7v6n3"]
+[gd_scene load_steps=12 format=3 uid="uid://bxq5dbfe7v6n3"]
 
 [ext_resource type="Script" path="res://Enemies/Small/SmallEnemy.gd" id="1_kdvst"]
 [ext_resource type="Texture2D" uid="uid://q3mijvyaa3ph" path="res://Enemies/ghost.png" id="2_ng1rp"]
@@ -12,11 +12,26 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tduts"]
 size = Vector2(19, 19)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af5pr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnisq"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djvrw"]
 bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vv71u"]
-size = Vector2(22, 22)
+size = Vector2(21, 21)
 
 [sub_resource type="Animation" id="Animation_oq3t1"]
 length = 0.001
@@ -111,7 +126,8 @@ offset_right = 20.0
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_af5pr")
+theme_override_styles/background = SubResource("StyleBoxFlat_hnisq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_djvrw")
 value = 50.0
 show_percentage = false
 

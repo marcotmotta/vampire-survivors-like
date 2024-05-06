@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0mhxwu2erjeu"]
+[gd_scene load_steps=7 format=3 uid="uid://d0mhxwu2erjeu"]
 
 [ext_resource type="Script" path="res://Enemies/MiniBoss/MiniBossEnemy.gd" id="1_n4y82"]
 [ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_3pbd1"]
@@ -6,8 +6,23 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6x7lo"]
 size = Vector2(37, 37)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smof5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fumop"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aa2gs"]
 bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipc1s"]
 size = Vector2(40, 40)
@@ -35,7 +50,8 @@ offset_right = 20.0
 offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_smof5")
+theme_override_styles/background = SubResource("StyleBoxFlat_fumop")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aa2gs")
 value = 50.0
 show_percentage = false
 

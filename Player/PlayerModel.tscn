@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://bitoab84jtokl"]
+[gd_scene load_steps=29 format=3 uid="uid://bitoab84jtokl"]
 
 [ext_resource type="Texture2D" uid="uid://ce8enkwy3pyx6" path="res://Player/black_player.png" id="1_jmsdf"]
 [ext_resource type="Texture2D" uid="uid://ciem7eu6qh2bk" path="res://Player/red_player.png" id="2_h6r3g"]
 [ext_resource type="Texture2D" uid="uid://lopmqsvu6nin" path="res://Player/blue_player.png" id="3_2jv78"]
+[ext_resource type="Texture2D" uid="uid://bfd824n8axf67" path="res://Player/gold_player.png" id="4_vf7kp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5cntq"]
 atlas = ExtResource("1_jmsdf")
@@ -148,6 +149,54 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wicmy"]
+atlas = ExtResource("4_vf7kp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx3so"]
+atlas = ExtResource("4_vf7kp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnljg"]
+atlas = ExtResource("4_vf7kp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfkgi"]
+atlas = ExtResource("4_vf7kp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5t2h"]
+atlas = ExtResource("4_vf7kp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_paix2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wicmy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx3so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnljg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfkgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5t2h")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
 [node name="PlayerModel" type="Node2D"]
 
 [node name="black" type="AnimatedSprite2D" parent="."]
@@ -171,3 +220,11 @@ sprite_frames = SubResource("SpriteFrames_5q8q2")
 animation = &"run"
 frame = 1
 frame_progress = 0.756127
+
+[node name="gold" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_paix2")
+animation = &"run"
+frame = 3
+frame_progress = 0.210261

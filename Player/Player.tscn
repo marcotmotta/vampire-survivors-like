@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=38 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
 [ext_resource type="Script" path="res://Player/EndUI.gd" id="3_0e1w3"]
@@ -8,8 +8,23 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45sbc"]
 size = Vector2(36, 45)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68ltt"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc1o4"]
 bg_color = Color(1, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+border_blend = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_7s40b"]
 font_size = 20
@@ -219,6 +234,7 @@ offset_right = 35.0
 offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_68ltt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cc1o4")
 value = 50.0
 show_percentage = false

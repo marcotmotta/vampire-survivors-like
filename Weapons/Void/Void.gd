@@ -15,6 +15,7 @@ func _ready():
 	play_sound()
 
 	if is_max_level:
+		damage *= 1.2
 		aoe += 1
 		$CPUParticles2D.color = 'ffe200'
 	else:
