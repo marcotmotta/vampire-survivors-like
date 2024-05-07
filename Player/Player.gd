@@ -10,7 +10,7 @@ var upgrades = {
 		'label': 'FIREBALL // NEW WEAPON',
 		'rarity': 1,
 		'max_level': 1,
-		'current_level': 1,
+		'current_level': 0,
 		'stats': {
 			'damage': 10,
 			'base_cooldown': 2, # seconds
@@ -50,9 +50,9 @@ var upgrades = {
 		'current_level': 0,
 		'stats': {
 			'damage': 20,
-			'base_cooldown': 2.5, # seconds
+			'base_cooldown': 2.4, # seconds
 			'bonus_cooldown': 0, # percentage (0 - 1)
-			'current_cooldown': 2.5, # starts with the value of base_cooldown
+			'current_cooldown': 2.4, # starts with the value of base_cooldown
 			'count': 1,
 			'damage_dealt': 0,
 		},
@@ -232,7 +232,7 @@ var upgrades = {
 		'label': '+ MAX HEALTH',
 		'icon': preload("res://Weapons/health_icon.png"),
 		'rarity': 1,
-		'max_level': 5,
+		'max_level': 6,
 		'current_level': 0,
 		'stats': {
 			'max': 100,
@@ -246,7 +246,7 @@ var upgrades = {
 		'label': '+ MOVE SPEED',
 		'icon': preload("res://Weapons/move_speed_icon.png"),
 		'rarity': 1,
-		'max_level': 999, # FIXME: debug purposes - change to 4
+		'max_level': 4,
 		'current_level': 0,
 		'stats': {
 			'current': 100
@@ -293,9 +293,22 @@ func _ready():
 	animated_player.visible = true
 	add_child(player_model_instance)
 
-	# FIXME: set the starting weapon. debug purposes
-	get_weapon_fireball()
-	#get_weapon_poison()
+	match Globals.current_starting_weapon:
+		'fireball':
+			get_weapon_fireball()
+			upgrades['fireball'].current_level += 1
+		'thunder':
+			get_weapon_thunder()
+			upgrades['thunder'].current_level += 1
+		'laser':
+			get_weapon_laser()
+			upgrades['laser'].current_level += 1
+		'void':
+			get_weapon_void()
+			upgrades['void'].current_level += 1
+		'poison':
+			get_weapon_poison()
+			upgrades['poison'].current_level += 1
 
 func get_input():
 	var input_direction = Input.get_vector("a", "d", "w", "s")
@@ -433,7 +446,7 @@ func _on_fireball_timer_timeout():
 			var fireball_instance = upgrades.fireball.scene.instantiate()
 			fireball_instance.global_position = global_position
 			fireball_instance.direction = closest_enemy.direction.rotated(deg_to_rad(shift))
-			fireball_instance.damage = ceil(upgrades.fireball.stats.damage * (1 + upgrades.atk_damage.current_level * 0.1))
+			fireball_instance.damage = ceil(upgrades.fireball.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
 			var sums = calculate_weapon_level('fireball')
 			fireball_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(fireball_instance)
@@ -446,7 +459,7 @@ func _on_thunder_timer_timeout():
 		if selected_enemy.enemy:
 			var thunder_instance = upgrades.thunder.scene.instantiate()
 			thunder_instance.global_position = selected_enemy.enemy.global_position
-			thunder_instance.damage = ceil(upgrades.thunder.stats.damage * (1 + upgrades.atk_damage.current_level * 0.1))
+			thunder_instance.damage = ceil(upgrades.thunder.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
 			var sums = calculate_weapon_level('thunder')
 			thunder_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(thunder_instance)
@@ -459,7 +472,7 @@ func _on_laser_timer_timeout():
 		if selected_enemy.enemy:
 			var laser_instance = upgrades.laser.scene.instantiate()
 			laser_instance.direction = selected_enemy.direction
-			laser_instance.damage = ceil(upgrades.laser.stats.damage * (1 + upgrades.atk_damage.current_level * 0.1))
+			laser_instance.damage = ceil(upgrades.laser.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
 			var sums = calculate_weapon_level('laser')
 			laser_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			add_child(laser_instance)
@@ -468,7 +481,7 @@ func _on_laser_timer_timeout():
 func _on_void_timer_timeout():
 	$VoidTimer.start(upgrades.void.stats.current_cooldown)
 	var void_instance = upgrades.void.scene.instantiate()
-	void_instance.damage = ceil(upgrades.void.stats.damage * (1 + upgrades.atk_damage.current_level * 0.1))
+	void_instance.damage = ceil(upgrades.void.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
 	void_instance.aoe = upgrades.void.stats.aoe
 	var sums = calculate_weapon_level('void')
 	void_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
@@ -481,7 +494,7 @@ func _on_poison_timer_timeout():
 		if selected_enemy.enemy:
 			var poison_instance = upgrades.poison.scene.instantiate()
 			poison_instance.global_position = ((selected_enemy.enemy.global_position - global_position) / 1.3) + global_position
-			poison_instance.damage = ceil(upgrades.poison.stats.damage * (1 + upgrades.atk_damage.current_level * 0.1))
+			poison_instance.damage = ceil(upgrades.poison.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
 			poison_instance.aoe = upgrades.poison.stats.aoe
 			var sums = calculate_weapon_level('poison')
 			poison_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
@@ -516,6 +529,9 @@ func _get_upgrades():
 
 	var filtered_upgrades = primary_upgrades + filtered_variant_upgrades
 	filtered_upgrades.shuffle()
+	
+	if not filtered_upgrades.size():
+		return false
 
 	# give upgrades options to player
 	for i in range(upgrade_count):
@@ -548,18 +564,20 @@ func _get_upgrades():
 			buttons[i] = {}
 			button.disabled = true
 
+	return true
+
 func level_up():
 	play_sound(fixed_sound_scene, level_up_sound)
 
 	current_level += 1
-	if current_level >= 70:
+	if current_level >= 80:
 		$CanvasLayer/Control/EndUI.end(false)
 		return
 
-	_get_upgrades()
-	$CanvasLayer/Control/UpgradeList.visible = true
-	upgrading = true
-	get_tree().paused = true
+	if _get_upgrades():
+		$CanvasLayer/Control/UpgradeList.visible = true
+		upgrading = true
+		get_tree().paused = true
 
 func get_exp(amount):
 	current_exp += amount
@@ -633,14 +651,14 @@ func upgrade_aoe_poison():
 func upgrade_health():
 	if not buff_icons.has('health'):
 		buff_icons.append('health')
-	upgrades.health.stats.max += 20
+	upgrades.health.stats.max += 25
 	upgrades.health.stats.current = min(upgrades.health.stats.current + 20, upgrades.health.stats.max)
 
 func upgrade_move_speed():
 	if not buff_icons.has('move_speed'):
 		buff_icons.append('move_speed')
-	# FIXME: remove the min. debug purposes
-	upgrades.move_speed.stats.current = min(upgrades.move_speed.stats.current + 20, 200)
+
+	upgrades.move_speed.stats.current += 25
 
 func get_weapon_fireball():
 	$FireballTimer.start(upgrades.fireball.stats.current_cooldown)

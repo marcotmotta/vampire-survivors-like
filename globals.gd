@@ -1,5 +1,8 @@
 extends Node
 
+# game version
+var game_version = '0.2'
+
 # player model color
 var colors = [
 	'black',
@@ -11,12 +14,24 @@ var colors = [
 var current_color_idx = 0
 var current_color = 'black'
 
+var starting_weapons = [
+	'fireball',
+	'thunder',
+	'laser',
+	'void',
+	'poison'
+]
+
+var current_starting_weapon_idx = 0
+var current_starting_weapon = 'fireball'
+
 # save and load
 var record_level = 0
 
 func save_game():
 	var save_file = FileAccess.open("user://savefile.save", FileAccess.WRITE)
 	var save_data = {
+		'game_version': game_version,
 		'record_level': record_level
 	}
 	var json_string = JSON.stringify(save_data)
@@ -39,6 +54,10 @@ func load_game():
 			continue
 
 		var node_data = json.get_data()
+
+		# load data into the game components
+		if not node_data.has('game_version') or game_version != node_data['game_version']:
+			return
 
 		record_level = node_data['record_level']
 

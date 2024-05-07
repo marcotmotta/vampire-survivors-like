@@ -4,5 +4,5 @@ func set_stats():
 	MAX_HEALTH = 40
 	health = 40
 	speed = 50
-	damage = 20
+	damage = 15
 	exp = 2
