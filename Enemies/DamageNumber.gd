@@ -13,12 +13,12 @@ func _ready():
 
 	$Label.text = str(damage)
 
-	if damage >= 20: # gold
+	if damage >= 50: # gold
 			$Label.label_settings.font_color = 'ffd600'
-	elif damage >= 13: # blue
+	elif damage >= 21: # blue
 			$Label.label_settings.font_color = '00e1ff'
 	else: # white
-		$Label.label_settings.font_color = 'ffffff'
+		$Label.label_settings.font_color = 'dddddd'
 
 func _on_expiration_timer_timeout():
 	queue_free()
