@@ -69,14 +69,12 @@ func load_game():
 
 func check_unlockables():
 	for locked_color in locked_colors:
-		if locked_color.level <= record_level:
+		if locked_color.level <= record_level and locked_color.color not in colors:
 			colors.append(locked_color.color)
-			locked_colors.erase(locked_color)
 	for locked_starting_weapon in locked_starting_weapons:
-		if locked_starting_weapon.level <= record_level:
+		if locked_starting_weapon.level <= record_level and locked_starting_weapon.weapon not in starting_weapons:
 			starting_weapons.append(locked_starting_weapon.weapon)
-			locked_starting_weapons.erase(locked_starting_weapon)
 
 func _ready():
-	#load_game()
+	load_game()
 	check_unlockables()

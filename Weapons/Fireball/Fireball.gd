@@ -13,7 +13,7 @@ func _ready():
 	play_sound()
 
 	if is_max_level:
-		damage *= 1.2
+		damage *= 2
 		$Particle.visible = false
 		$Particle2.visible = true
 

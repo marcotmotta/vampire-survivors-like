@@ -27,19 +27,17 @@ func end(died = false):
 		# add it to color array;
 		# show in the UI;
 		# remove it from locked_colors array;
-		if locked_color.level <= player.current_level:
+		if locked_color.level <= player.current_level and locked_color.color not in Globals.colors:
 			Globals.colors.append(locked_color.color)
 			$UnlockedLabel.text += 'NEW COLOR! ' + locked_color.color.capitalize() + '\n'
-			Globals.locked_colors.erase(locked_color)
 	for locked_starting_weapon in Globals.locked_starting_weapons:
 		# case: unlocked a starting_weapon
 		# add it to starting_weapon array;
 		# show in the UI;
 		# remove it from locked_starting_weapons array;
-		if locked_starting_weapon.level <= player.current_level:
+		if locked_starting_weapon.level <= player.current_level and locked_starting_weapon.weapon not in Globals.starting_weapons:
 			Globals.starting_weapons.append(locked_starting_weapon.weapon)
 			$UnlockedLabel.text += 'NEW STARTING WEAPON! ' + locked_starting_weapon.weapon.capitalize() + '\n'
-			Globals.locked_starting_weapons.erase(locked_starting_weapon)
 
 func _on_back_pressed():
 	get_tree().paused = false

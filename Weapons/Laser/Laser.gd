@@ -13,7 +13,7 @@ func _ready():
 
 	if is_max_level:
 		$Particle2.visible = true
-		damage *= 1.5 # FIXME: bad balancing
+		damage *= 2.5
 	$RayCast.target_position = direction * 550
 	$Particle.position = direction * 40
 	$Particle.direction = direction

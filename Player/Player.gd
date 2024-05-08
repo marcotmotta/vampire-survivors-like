@@ -571,7 +571,7 @@ func level_up():
 	play_sound(fixed_sound_scene, level_up_sound)
 
 	current_level += 1
-	if current_level >= 80:
+	if current_level >= 100:
 		$CanvasLayer/Control/EndUI.end(false)
 		return
 
@@ -588,19 +588,19 @@ func get_exp(amount):
 
 # upgrade functions
 func upgrade_atk_damage_fireball():
-	upgrades.fireball.stats.damage += 2
+	upgrades.fireball.stats.damage += 3
 
 func upgrade_atk_damage_thunder():
-	upgrades.thunder.stats.damage += 2
+	upgrades.thunder.stats.damage += 3
 
 func upgrade_atk_damage_laser():
-	upgrades.laser.stats.damage += 2
+	upgrades.laser.stats.damage += 3
 
 func upgrade_atk_damage_void():
-	upgrades.void.stats.damage += 3
+	upgrades.void.stats.damage += 4
 
 func upgrade_atk_damage_poison():
-	upgrades.poison.stats.damage += 3
+	upgrades.poison.stats.damage += 4
 
 func upgrade_atk_damage_all():
 	if not buff_icons.has('atk_damage'):

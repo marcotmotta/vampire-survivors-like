@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dp40lbi4ikfaf" path="res://Enemies/golem.png" id="2_3pbd1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6x7lo"]
-size = Vector2(37, 37)
+size = Vector2(34, 34)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fumop"]
 bg_color = Color(0, 0, 0, 0.392157)

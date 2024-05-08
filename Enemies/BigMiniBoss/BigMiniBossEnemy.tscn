@@ -6,7 +6,7 @@
 load_path = "res://.godot/imported/golem.png-11b7c5f8337cc70144c6bbb72d5a404e.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqoqb"]
-size = Vector2(45, 45)
+size = Vector2(38, 38)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vyp3"]
 bg_color = Color(0, 0, 0, 0.392157)

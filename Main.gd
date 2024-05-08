@@ -20,6 +20,8 @@ var multiple_enemies_count = 1
 
 var minimum_spawn_time = 0.3
 
+const MAX_NUMBER_OF_ENEMIES = 165
+
 func _ready():
 	randomize()
 
@@ -40,16 +42,19 @@ func _choose_enemy():
 
 func _on_spawn_timer_timeout():
 	# calculate chance of double enemy
-	for i in range(multiple_enemies_count if randf() <= chance_multiple_enemies else 1):
-		# choose spawn point
-		while(true):
-			var spawn_point = Vector2(randi_range(30, 1100), randi_range(30, 600))
-			if (spawn_point - get_node('Player').position).length() > 400:
-				var enemy_instance = _choose_enemy()
-				enemy_instance.global_position = spawn_point
-				add_child(enemy_instance)
-				break
+	var enemy_count = get_tree().get_nodes_in_group("enemy").size()
+	if enemy_count < MAX_NUMBER_OF_ENEMIES:
+		for i in range(multiple_enemies_count if randf() <= chance_multiple_enemies else 1):
+			# choose spawn point
+			while(true):
+				var spawn_point = Vector2(randi_range(30, 1100), randi_range(30, 600))
+				if (spawn_point - get_node('Player').position).length() > 400:
+					var enemy_instance = _choose_enemy()
+					enemy_instance.global_position = spawn_point
+					add_child(enemy_instance)
+					break
 
+	print(enemy_count)
 	$SpawnTimer.start(enemy_spawn_timer)
 
 # FIXME: temporary solution
@@ -100,12 +105,30 @@ func enemy_died(exp):
 	# up to level 7 at level 60
 	elif enemy_spawn_level <= 6 and get_node('Player').current_level >= 60:
 		enemy_spawn_level += 1
-		chance_big_enemy = 0.35
-		chance_small_enemy = 0.4
-		chance_mini_boss_enemy = 0.15
+		chance_big_enemy = 0.2
+		chance_small_enemy = 0.5
+		chance_mini_boss_enemy = 0.2
 		chance_big_mini_boss_enemy = 0.05
 		chance_multiple_enemies = 1
 		multiple_enemies_count = 10
+	# up to level 8 at level 70
+	elif enemy_spawn_level <= 7 and get_node('Player').current_level >= 70:
+		enemy_spawn_level += 1
+		chance_big_enemy = 0.2
+		chance_small_enemy = 0.3
+		chance_mini_boss_enemy = 0.3
+		chance_big_mini_boss_enemy = 0.1
+		chance_multiple_enemies = 1
+		multiple_enemies_count = 10
+	# up to level 9 at level 80
+	elif enemy_spawn_level <= 8 and get_node('Player').current_level >= 80:
+		enemy_spawn_level += 1
+		chance_big_enemy = 0.1
+		chance_small_enemy = 0.1
+		chance_mini_boss_enemy = 0.5
+		chance_big_mini_boss_enemy = 0.3
+		chance_multiple_enemies = 1
+		multiple_enemies_count = 12
 
 	# reduce enemy spawn timer
 	enemy_spawn_timer = max(enemy_spawn_timer - 0.05, minimum_spawn_time)
