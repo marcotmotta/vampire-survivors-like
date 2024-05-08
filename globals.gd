@@ -6,24 +6,30 @@ var game_version = '0.2'
 # player model color
 var colors = [
 	'black',
-	'red',
-	'blue',
-	'gold'
+	'red'
 ]
 
 var current_color_idx = 0
 var current_color = 'black'
 
+var locked_colors = [
+	{ 'color': 'blue', 'level': 30 },
+	{ 'color': 'gold', 'level': 60 },
+]
+
 var starting_weapons = [
 	'fireball',
-	'thunder',
-	'laser',
-	'void',
-	'poison'
+	'thunder'
 ]
 
 var current_starting_weapon_idx = 0
 var current_starting_weapon = 'fireball'
+
+var locked_starting_weapons = [
+	{ 'weapon': 'laser', 'level': 10 },
+	{ 'weapon': 'void', 'level': 40 },
+	{ 'weapon': 'poison', 'level': 50 },
+]
 
 # save and load
 var record_level = 0
@@ -61,5 +67,16 @@ func load_game():
 
 		record_level = node_data['record_level']
 
+func check_unlockables():
+	for locked_color in locked_colors:
+		if locked_color.level <= record_level:
+			colors.append(locked_color.color)
+			locked_colors.erase(locked_color)
+	for locked_starting_weapon in locked_starting_weapons:
+		if locked_starting_weapon.level <= record_level:
+			starting_weapons.append(locked_starting_weapon.weapon)
+			locked_starting_weapons.erase(locked_starting_weapon)
+
 func _ready():
-	load_game()
+	#load_game()
+	check_unlockables()

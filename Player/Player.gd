@@ -136,7 +136,7 @@ var upgrades = {
 				'label': 'VOID // + Atk Damage',
 				'icon': preload("res://Weapons/void_icon.png"),
 				'rarity': 1,
-				'max_level': 6, # must be a pair number (mark do futuro: nao pergunte apenas aceite)
+				'max_level': 6,
 				'current_level': 0
 			},
 			{ # + aoe
@@ -174,7 +174,7 @@ var upgrades = {
 				'label': 'POISON // + Atk Damage',
 				'icon': preload("res://Weapons/poison_icon.png"),
 				'rarity': 1,
-				'max_level': 4, # must be a pair number (mark do futuro: nao pergunte apenas aceite)
+				'max_level': 4,
 				'current_level': 0
 			},
 			{ # + aoe
@@ -202,7 +202,8 @@ var upgrades = {
 		'label': 'ALL // + Atk Damage',
 		'icon': preload("res://Weapons/atk_damage_icon.png"),
 		'rarity': 2,
-		'max_level': 5,
+		'ratio': 0.1, # percentage (0 - 1)
+		'max_level': 8,
 		'current_level': 0
 	},
 	'atk_speed': {
@@ -446,7 +447,7 @@ func _on_fireball_timer_timeout():
 			var fireball_instance = upgrades.fireball.scene.instantiate()
 			fireball_instance.global_position = global_position
 			fireball_instance.direction = closest_enemy.direction.rotated(deg_to_rad(shift))
-			fireball_instance.damage = ceil(upgrades.fireball.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
+			fireball_instance.damage = ceil(upgrades.fireball.stats.damage * (1 + upgrades.atk_damage.current_level * upgrades.atk_damage.ratio))
 			var sums = calculate_weapon_level('fireball')
 			fireball_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(fireball_instance)
@@ -459,7 +460,7 @@ func _on_thunder_timer_timeout():
 		if selected_enemy.enemy:
 			var thunder_instance = upgrades.thunder.scene.instantiate()
 			thunder_instance.global_position = selected_enemy.enemy.global_position
-			thunder_instance.damage = ceil(upgrades.thunder.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
+			thunder_instance.damage = ceil(upgrades.thunder.stats.damage * (1 + upgrades.atk_damage.current_level * upgrades.atk_damage.ratio))
 			var sums = calculate_weapon_level('thunder')
 			thunder_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(thunder_instance)
@@ -472,7 +473,7 @@ func _on_laser_timer_timeout():
 		if selected_enemy.enemy:
 			var laser_instance = upgrades.laser.scene.instantiate()
 			laser_instance.direction = selected_enemy.direction
-			laser_instance.damage = ceil(upgrades.laser.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
+			laser_instance.damage = ceil(upgrades.laser.stats.damage * (1 + upgrades.atk_damage.current_level * upgrades.atk_damage.ratio))
 			var sums = calculate_weapon_level('laser')
 			laser_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			add_child(laser_instance)
@@ -481,7 +482,7 @@ func _on_laser_timer_timeout():
 func _on_void_timer_timeout():
 	$VoidTimer.start(upgrades.void.stats.current_cooldown)
 	var void_instance = upgrades.void.scene.instantiate()
-	void_instance.damage = ceil(upgrades.void.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
+	void_instance.damage = ceil(upgrades.void.stats.damage * (1 + upgrades.atk_damage.current_level * upgrades.atk_damage.ratio))
 	void_instance.aoe = upgrades.void.stats.aoe
 	var sums = calculate_weapon_level('void')
 	void_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
@@ -494,7 +495,7 @@ func _on_poison_timer_timeout():
 		if selected_enemy.enemy:
 			var poison_instance = upgrades.poison.scene.instantiate()
 			poison_instance.global_position = ((selected_enemy.enemy.global_position - global_position) / 1.3) + global_position
-			poison_instance.damage = ceil(upgrades.poison.stats.damage * (1 + upgrades.atk_damage.current_level * 0.15))
+			poison_instance.damage = ceil(upgrades.poison.stats.damage * (1 + upgrades.atk_damage.current_level * upgrades.atk_damage.ratio))
 			poison_instance.aoe = upgrades.poison.stats.aoe
 			var sums = calculate_weapon_level('poison')
 			poison_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
@@ -587,19 +588,19 @@ func get_exp(amount):
 
 # upgrade functions
 func upgrade_atk_damage_fireball():
-	upgrades.fireball.stats.damage += 1
+	upgrades.fireball.stats.damage += 2
 
 func upgrade_atk_damage_thunder():
-	upgrades.thunder.stats.damage += 1
+	upgrades.thunder.stats.damage += 2
 
 func upgrade_atk_damage_laser():
-	upgrades.laser.stats.damage += 1
+	upgrades.laser.stats.damage += 2
 
 func upgrade_atk_damage_void():
-	upgrades.void.stats.damage += 2
+	upgrades.void.stats.damage += 3
 
 func upgrade_atk_damage_poison():
-	upgrades.poison.stats.damage += 2
+	upgrades.poison.stats.damage += 3
 
 func upgrade_atk_damage_all():
 	if not buff_icons.has('atk_damage'):
