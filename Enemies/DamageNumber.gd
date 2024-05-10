@@ -2,7 +2,6 @@ extends Node2D
 
 var damage
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 
@@ -15,8 +14,10 @@ func _ready():
 
 	if damage >= 100: # gold
 			$Label.label_settings.font_color = 'ffd600'
-	elif damage >= 50: # blue
+			self.scale = Vector2(1.4, 1.4)
+	elif damage >= 25: # blue
 			$Label.label_settings.font_color = '00e1ff'
+			self.scale = Vector2(1.2, 1.2)
 	else: # white
 		$Label.label_settings.font_color = 'cccccc'
 

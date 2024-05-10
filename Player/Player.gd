@@ -5,9 +5,10 @@ var upgrades = {
 		'upgrade': 'fireball',
 		'scene': preload("res://Weapons/Fireball/Fireball.tscn"),
 		'icon': preload("res://Weapons/fireball_icon.png"),
+		'icon_big': preload("res://Weapons/fireball_icon_big.png"),
 		'callable': Callable(self, 'get_weapon_fireball'),
 		'type': 'weapon',
-		'label': 'FIREBALL // NEW WEAPON',
+		'label': 'FIREBALL\nNEW WEAPON!',
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
@@ -22,16 +23,18 @@ var upgrades = {
 		'upgrades': [
 			{ # + atk count
 				'callable': Callable(self, 'upgrade_atk_count_fireball'),
-				'label': 'FIREBALL // + Atk Count',
+				'label': 'FIREBALL\n+ 1 Attack Count',
 				'icon': preload("res://Weapons/fireball_icon.png"),
+				'icon_big': preload("res://Weapons/fireball_icon_big.png"),
 				'rarity': 1,
 				'max_level': 2,
 				'current_level': 0
 			},
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_fireball'),
-				'label': 'FIREBALL // + Atk Damage',
+				'label': 'FIREBALL\n+ 30% Base Damage',
 				'icon': preload("res://Weapons/fireball_icon.png"),
+				'icon_big': preload("res://Weapons/fireball_icon_big.png"),
 				'rarity': 1,
 				'max_level': 7,
 				'current_level': 0
@@ -42,9 +45,10 @@ var upgrades = {
 		'upgrade': 'thunder',
 		'scene': preload("res://Weapons/Thunder/Thunder.tscn"),
 		'icon': preload("res://Weapons/thunder_icon.png"),
+		'icon_big': preload("res://Weapons/thunder_icon_big.png"),
 		'callable': Callable(self, 'get_weapon_thunder'),
 		'type': 'weapon',
-		'label': 'THUNDER // NEW WEAPON',
+		'label': 'THUNDER\nNEW WEAPON!',
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
@@ -59,16 +63,18 @@ var upgrades = {
 		'upgrades': [
 			{ # + atk count
 				'callable': Callable(self, 'upgrade_atk_count_thunder'),
-				'label': 'THUNDER // + Atk Count',
+				'label': 'THUNDER\n+ 1 Attack Count',
 				'icon': preload("res://Weapons/thunder_icon.png"),
+				'icon_big': preload("res://Weapons/thunder_icon_big.png"),
 				'rarity': 1,
 				'max_level': 2,
 				'current_level': 0
 			},
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_thunder'),
-				'label': 'THUNDER // + Atk Damage',
+				'label': 'THUNDER\n+ 30% Base Damage',
 				'icon': preload("res://Weapons/thunder_icon.png"),
+				'icon_big': preload("res://Weapons/thunder_icon_big.png"),
 				'rarity': 1,
 				'max_level': 7,
 				'current_level': 0
@@ -79,9 +85,10 @@ var upgrades = {
 		'upgrade': 'laser',
 		'scene': preload("res://Weapons/Laser/Laser.tscn"),
 		'icon': preload("res://Weapons/laser_icon.png"),
+		'icon_big': preload("res://Weapons/laser_icon_big.png"),
 		'callable': Callable(self, 'get_weapon_laser'),
 		'type': 'weapon',
-		'label': 'LASER // NEW WEAPON',
+		'label': 'LASER\nNEW WEAPON!',
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
@@ -96,16 +103,18 @@ var upgrades = {
 		'upgrades': [
 			{ # + atk count
 				'callable': Callable(self, 'upgrade_atk_count_laser'),
-				'label': 'LASER // + Atk Count',
+				'label': 'LASER\n+ 1 Attack Count',
 				'icon': preload("res://Weapons/laser_icon.png"),
+				'icon_big': preload("res://Weapons/laser_icon_big.png"),
 				'rarity': 1,
 				'max_level': 2,
 				'current_level': 0
 			},
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_laser'),
-				'label': 'LASER // + Atk Damage',
+				'label': 'LASER\n+ 30% Base Damage',
 				'icon': preload("res://Weapons/laser_icon.png"),
+				'icon_big': preload("res://Weapons/laser_icon_big.png"),
 				'rarity': 1,
 				'max_level': 7,
 				'current_level': 0
@@ -116,9 +125,10 @@ var upgrades = {
 		'upgrade': 'void',
 		'scene': preload("res://Weapons/Void/Void.tscn"),
 		'icon': preload("res://Weapons/void_icon.png"),
+		'icon_big': preload("res://Weapons/void_icon_big.png"),
 		'callable': Callable(self, 'get_weapon_void'),
 		'type': 'weapon',
-		'label': 'VOID // NEW WEAPON',
+		'label': 'VOID\nNEW WEAPON!',
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
@@ -133,16 +143,18 @@ var upgrades = {
 		'upgrades': [
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_void'),
-				'label': 'VOID // + Atk Damage',
+				'label': 'VOID\n+ 40% Base Damage',
 				'icon': preload("res://Weapons/void_icon.png"),
+				'icon_big': preload("res://Weapons/void_icon_big.png"),
 				'rarity': 1,
 				'max_level': 6,
 				'current_level': 0
 			},
 			{ # + aoe
 				'callable': Callable(self, 'upgrade_aoe_void'),
-				'label': 'VOID // + AoE',
+				'label': 'VOID\n+ 1 Area of Effect',
 				'icon': preload("res://Weapons/void_icon.png"),
+				'icon_big': preload("res://Weapons/void_icon_big.png"),
 				'rarity': 1,
 				'max_level': 3,
 				'current_level': 0
@@ -153,9 +165,10 @@ var upgrades = {
 		'upgrade': 'poison',
 		'scene': preload("res://Weapons/Poison/Poison.tscn"),
 		'icon': preload("res://Weapons/poison_icon.png"),
+		'icon_big': preload("res://Weapons/poison_icon_big.png"),
 		'callable': Callable(self, 'get_weapon_poison'),
 		'type': 'weapon',
-		'label': 'POISON // NEW WEAPON',
+		'label': 'POISON\nNEW WEAPON!',
 		'rarity': 1,
 		'max_level': 1,
 		'current_level': 0,
@@ -171,24 +184,27 @@ var upgrades = {
 		'upgrades': [
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_poison'),
-				'label': 'POISON // + Atk Damage',
+				'label': 'POISON\n+ 30% Base Damage',
 				'icon': preload("res://Weapons/poison_icon.png"),
+				'icon_big': preload("res://Weapons/poison_icon_big.png"),
 				'rarity': 1,
 				'max_level': 4,
 				'current_level': 0
 			},
 			{ # + aoe
 				'callable': Callable(self, 'upgrade_aoe_poison'),
-				'label': 'POISON // + AoE',
+				'label': 'POISON\n+ 1 Area of Effect',
 				'icon': preload("res://Weapons/poison_icon.png"),
+				'icon_big': preload("res://Weapons/poison_icon_big.png"),
 				'rarity': 1,
 				'max_level': 3,
 				'current_level': 0
 			},
 			{ # + atk count
 				'callable': Callable(self, 'upgrade_atk_count_poison'),
-				'label': 'POISON // + Atk Count',
+				'label': 'POISON\n+ 1 Attack Count',
 				'icon': preload("res://Weapons/poison_icon.png"),
+				'icon_big': preload("res://Weapons/poison_icon_big.png"),
 				'rarity': 1,
 				'max_level': 2,
 				'current_level': 0
@@ -199,8 +215,9 @@ var upgrades = {
 		'upgrade': 'atk_damage',
 		'callable': Callable(self, 'upgrade_atk_damage_all'),
 		'type': 'buff',
-		'label': 'ALL // + Atk Damage',
+		'label': 'RED BLADE\n+ 10% All Damage',
 		'icon': preload("res://Weapons/atk_damage_icon.png"),
+		'icon_big': preload("res://Weapons/atk_damage_icon_big.png"),
 		'rarity': 2,
 		'ratio': 0.1, # percentage (0 - 1)
 		'max_level': 8,
@@ -210,8 +227,9 @@ var upgrades = {
 		'upgrade': 'atk_speed',
 		'callable': Callable(self, 'upgrade_atk_speed_all'),
 		'type': 'buff',
-		'label': 'ALL // + Atk Speed',
+		'label': 'GREEN BLADE\n+ 5% All Attack Speed',
 		'icon': preload("res://Weapons/atk_speed_icon.png"),
+		'icon_big': preload("res://Weapons/atk_speed_icon_big.png"),
 		'rarity': 2,
 		'max_level': 8,
 		'current_level': 0
@@ -220,8 +238,9 @@ var upgrades = {
 		'upgrade': 'atk_count',
 		'callable': Callable(self, 'upgrade_atk_count_all'),
 		'type': 'buff',
-		'label': 'ALL // + Atk Count',
+		'label': 'BLUE BLADE\n+ 1 All Attack Count',
 		'icon': preload("res://Weapons/atk_count_icon.png"),
+		'icon_big': preload("res://Weapons/atk_count_icon_big.png"),
 		'rarity': 2,
 		'max_level': 2,
 		'current_level': 0
@@ -230,8 +249,9 @@ var upgrades = {
 		'upgrade': 'health',
 		'callable': Callable(self, 'upgrade_health'),
 		'type': 'buff',
-		'label': '+ MAX HEALTH',
+		'label': 'HEART\n+ 25% Base Max Health',
 		'icon': preload("res://Weapons/health_icon.png"),
+		'icon_big': preload("res://Weapons/health_icon_big.png"),
 		'rarity': 1,
 		'max_level': 6,
 		'current_level': 0,
@@ -244,8 +264,9 @@ var upgrades = {
 		'upgrade': 'move_speed',
 		'callable': Callable(self, 'upgrade_move_speed'),
 		'type': 'buff',
-		'label': '+ MOVE SPEED',
+		'label': 'BOOTS\n+ 25% Base Move Speed',
 		'icon': preload("res://Weapons/move_speed_icon.png"),
+		'icon_big': preload("res://Weapons/move_speed_icon_big.png"),
 		'rarity': 1,
 		'max_level': 4,
 		'current_level': 0,
@@ -541,8 +562,13 @@ func _get_upgrades():
 		if i < filtered_upgrades.size():
 			var selected_upgrade = filtered_upgrades[i]
 			button.text = selected_upgrade.label
-			button.icon = selected_upgrade.icon
-			if selected_upgrade.rarity == 3:
+			button.icon = selected_upgrade.icon_big
+			if selected_upgrade.has('type') and selected_upgrade.type == 'weapon':
+				button['theme_override_colors/font_color'] = 'ffffff'
+				button['theme_override_colors/font_hover_color'] = 'ffffff'
+				button['theme_override_styles/normal'].border_color = 'ff0004'
+				button['theme_override_styles/hover'].border_color = 'ff0004'
+			elif selected_upgrade.rarity == 3:
 				button['theme_override_colors/font_color'] = 'ffd600'
 				button['theme_override_colors/font_hover_color'] = 'ffd600'
 				button['theme_override_styles/normal'].border_color = 'ffd600'
