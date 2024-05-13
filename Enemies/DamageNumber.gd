@@ -14,12 +14,12 @@ func _ready():
 
 	if damage >= 100: # gold
 			$Label.label_settings.font_color = 'ffd600'
-			self.scale = Vector2(1.4, 1.4)
+			self.scale = Vector2(1.3, 1.3)
 	elif damage >= 25: # blue
 			$Label.label_settings.font_color = '00e1ff'
-			self.scale = Vector2(1.2, 1.2)
+			self.scale = Vector2(1.15, 1.15)
 	else: # white
-		$Label.label_settings.font_color = 'cccccc'
+		$Label.label_settings.font_color = 'd4d4d4'
 
 func _on_expiration_timer_timeout():
 	queue_free()

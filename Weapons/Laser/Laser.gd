@@ -14,6 +14,7 @@ func _ready():
 	if is_max_level:
 		$Particle2.visible = true
 		damage *= 2.5
+		damage += randi_range(0, 2)
 	$RayCast.target_position = direction * 550
 	$Particle.position = direction * 40
 	$Particle.direction = direction

@@ -16,6 +16,7 @@ func _ready():
 
 	if is_max_level:
 		damage *= 2
+		damage += randi_range(0, 2)
 		aoe += 1
 		$CPUParticles2D.color = 'ffe200'
 	else:

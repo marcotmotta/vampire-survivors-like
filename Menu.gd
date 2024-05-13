@@ -11,6 +11,7 @@ var weapon_icons = {
 	'laser': preload("res://Weapons/laser_icon.png"),
 	'void': preload("res://Weapons/void_icon.png"),
 	'poison': preload("res://Weapons/poison_icon.png"),
+	'arrow': preload("res://Weapons/arrow_icon.png"),
 }
 
 # armor sprites
@@ -26,9 +27,14 @@ func _ready():
 		'red': $CanvasLayer/Control/redArmor,
 		'gold': $CanvasLayer/Control/goldArmor
 	}
-	
+
+	# reset selectable fields when menu starts
 	$CanvasLayer/Control/ColorSelector/Color.color = Globals.current_color
 	$CanvasLayer/Control/Colorlabel.text = Globals.current_color.capitalize()
+	$CanvasLayer/Control/WeaponSelector/Weapon.texture = weapon_icons[Globals.current_starting_weapon]
+	$CanvasLayer/Control/StartingWeaponLabel.text = Globals.current_starting_weapon.capitalize()
+
+	# set current armor color on menu
 	for sprite in armor_sprites.values():
 		sprite.visible = false
 	armor_sprites[Globals.current_color].visible = true

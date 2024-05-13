@@ -72,7 +72,7 @@ var upgrades = {
 			},
 			{ # + atk damage
 				'callable': Callable(self, 'upgrade_atk_damage_thunder'),
-				'label': 'THUNDER\n+ 30% Base Damage',
+				'label': 'THUNDER\n+ 15% Base Damage',
 				'icon': preload("res://Weapons/thunder_icon.png"),
 				'icon_big': preload("res://Weapons/thunder_icon_big.png"),
 				'rarity': 1,
@@ -211,6 +211,46 @@ var upgrades = {
 			},
 		]
 	},
+	'arrow': {
+		'upgrade': 'arrow',
+		'scene': preload("res://Weapons/Arrow/Arrow.tscn"),
+		'icon': preload("res://Weapons/arrow_icon.png"),
+		'icon_big': preload("res://Weapons/arrow_icon_big.png"),
+		'callable': Callable(self, 'get_weapon_arrow'),
+		'type': 'weapon',
+		'label': 'ARROW\nNEW WEAPON!',
+		'rarity': 1,
+		'max_level': 1,
+		'current_level': 0,
+		'stats': {
+			'damage': 10,
+			'base_cooldown': 2.2, # seconds
+			'bonus_cooldown': 0, # percentage (0 - 1)
+			'current_cooldown': 2.2, # starts with the value of base_cooldown
+			'count': 1,
+			'damage_dealt': 0,
+		},
+		'upgrades': [
+			{ # + atk count
+				'callable': Callable(self, 'upgrade_atk_count_arrow'),
+				'label': 'ARROW\n+ 1 Attack Count',
+				'icon': preload("res://Weapons/arrow_icon.png"),
+				'icon_big': preload("res://Weapons/arrow_icon_big.png"),
+				'rarity': 1,
+				'max_level': 3,
+				'current_level': 0
+			},
+			{ # + atk damage
+				'callable': Callable(self, 'upgrade_atk_damage_arrow'),
+				'label': 'ARROW\n+ 30% Base Damage',
+				'icon': preload("res://Weapons/arrow_icon.png"),
+				'icon_big': preload("res://Weapons/arrow_icon_big.png"),
+				'rarity': 1,
+				'max_level': 6,
+				'current_level': 0
+			}
+		]
+	},
 	'atk_damage': {
 		'upgrade': 'atk_damage',
 		'callable': Callable(self, 'upgrade_atk_damage_all'),
@@ -288,6 +328,7 @@ var hurt_sound = preload("res://SFX/hurt_sound.wav")
 var heal_sound = preload("res://SFX/heal_sound.wav")
 var hover_sound = preload("res://SFX/hover_sound.wav")
 var upgrade_sound = preload("res://SFX/upgrade_sound.wav")
+var arrow_sound = preload("res://SFX/arrow_sound.wav")
 
 var buttons = [{},{},{}]
 
@@ -331,6 +372,9 @@ func _ready():
 		'poison':
 			get_weapon_poison()
 			upgrades['poison'].current_level += 1
+		'arrow':
+			get_weapon_arrow()
+			upgrades['arrow'].current_level += 1
 
 func get_input():
 	var input_direction = Input.get_vector("a", "d", "w", "s")
@@ -405,6 +449,7 @@ func _process(delta):
 	upgrades.laser.stats.current_cooldown = upgrades.laser.stats.base_cooldown * (1 - upgrades.laser.stats.bonus_cooldown)
 	upgrades.void.stats.current_cooldown = upgrades.void.stats.base_cooldown * (1 - upgrades.void.stats.bonus_cooldown)
 	upgrades.poison.stats.current_cooldown = upgrades.poison.stats.base_cooldown * (1 - upgrades.poison.stats.bonus_cooldown)
+	upgrades.arrow.stats.current_cooldown = upgrades.arrow.stats.base_cooldown * (1 - upgrades.arrow.stats.bonus_cooldown)
 
 	# icons
 	calculate_icon_position()
@@ -422,6 +467,7 @@ func _process(delta):
 	damage_dealt += 'Laser: ' + str(upgrades.laser.stats.damage_dealt) + '\n'
 	damage_dealt += 'Void: ' + str(upgrades.void.stats.damage_dealt) + '\n'
 	damage_dealt += 'Poison: ' + str(upgrades.poison.stats.damage_dealt) + '\n'
+	damage_dealt += 'Arrow: ' + str(upgrades.arrow.stats.damage_dealt) + '\n'
 
 	$CanvasLayer/Control/PauseUI/DamageDealtLabel.text = damage_dealt
 
@@ -522,6 +568,24 @@ func _on_poison_timer_timeout():
 			poison_instance.is_max_level = sums.sum_current_level >= sums.sum_max_level
 			get_parent().add_child(poison_instance)
 			await get_tree().create_timer(0.15).timeout
+
+func _on_arrow_timer_timeout():
+	var random_enemy = _get_closest_enemy()
+	$ArrowTimer.start(upgrades.arrow.stats.current_cooldown)
+	if random_enemy.enemy:
+		play_sound(sound_scene, arrow_sound)
+		var sums = calculate_weapon_level('arrow')
+		var is_max_level = sums.sum_current_level >= sums.sum_max_level
+		var arrow_count = upgrades.arrow.stats.count + 2 if is_max_level else upgrades.arrow.stats.count
+		var offset = 360 / arrow_count
+		for i in range(arrow_count):
+			var shift = offset * i
+			var arrow_instance = upgrades.arrow.scene.instantiate()
+			arrow_instance.global_position = global_position
+			arrow_instance.direction = random_enemy.direction.rotated(deg_to_rad(shift))
+			arrow_instance.damage = ceil(upgrades.arrow.stats.damage * (1 + upgrades.atk_damage.current_level * upgrades.atk_damage.ratio))
+			arrow_instance.is_max_level = is_max_level
+			get_parent().add_child(arrow_instance)
 
 # health interation functions
 func heal(amount):
@@ -628,14 +692,12 @@ func upgrade_atk_damage_void():
 func upgrade_atk_damage_poison():
 	upgrades.poison.stats.damage += 4
 
+func upgrade_atk_damage_arrow():
+	upgrades.arrow.stats.damage += 3
+
 func upgrade_atk_damage_all():
 	if not buff_icons.has('atk_damage'):
 		buff_icons.append('atk_damage')
-	#upgrade_atk_damage_fireball()
-	#upgrade_atk_damage_thunder()
-	#upgrade_atk_damage_laser()
-	#upgrade_atk_damage_void() 
-	#pgrade_atk_damage_poison()
 
 func upgrade_atk_speed_all():
 	if not buff_icons.has('atk_speed'):
@@ -648,6 +710,7 @@ func upgrade_atk_speed_all():
 	upgrades.laser.stats.bonus_cooldown += 0.05
 	upgrades.void.stats.bonus_cooldown += 0.05
 	upgrades.poison.stats.bonus_cooldown += 0.05
+	upgrades.arrow.stats.bonus_cooldown += 0.05
 
 func upgrade_atk_count_fireball():
 	upgrades.fireball.stats.count += 1
@@ -661,6 +724,9 @@ func upgrade_atk_count_laser():
 func upgrade_atk_count_poison():
 	upgrades.poison.stats.count += 1
 
+func upgrade_atk_count_arrow():
+	upgrades.arrow.stats.count += 1
+
 func upgrade_atk_count_all():
 	if not buff_icons.has('atk_count'):
 		buff_icons.append('atk_count')
@@ -668,6 +734,7 @@ func upgrade_atk_count_all():
 	upgrade_atk_count_thunder()
 	upgrade_atk_count_laser()
 	upgrade_atk_count_poison()
+	upgrade_atk_count_arrow()
 
 func upgrade_aoe_void():
 	upgrades.void.stats.aoe += 1
@@ -706,6 +773,10 @@ func get_weapon_void():
 func get_weapon_poison():
 	$PoisonTimer.start(1)
 	weapon_icons.append('poison')
+
+func get_weapon_arrow():
+	$ArrowTimer.start(upgrades.arrow.stats.current_cooldown)
+	weapon_icons.append('arrow')
 
 # upgrade buttons
 func _on_button_0_pressed():
