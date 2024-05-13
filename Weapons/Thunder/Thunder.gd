@@ -15,6 +15,7 @@ func _ready():
 		$Particle2.visible = true
 		$Particle2.emitting = true
 		damage *= 4
+		damage += randi_range(0, 2)
 	else:
 		$Particle.visible = true
 		$Particle2.visible = false

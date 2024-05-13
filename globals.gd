@@ -29,6 +29,7 @@ var locked_starting_weapons = [
 	{ 'weapon': 'laser', 'level': 10 },
 	{ 'weapon': 'void', 'level': 40 },
 	{ 'weapon': 'poison', 'level': 50 },
+	{ 'weapon': 'arrow', 'level': 70 },
 ]
 
 # save and load

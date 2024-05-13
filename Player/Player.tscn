@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=50 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
 [ext_resource type="Script" path="res://Player/EndUI.gd" id="3_0e1w3"]
@@ -275,7 +275,15 @@ font_size = 20
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_iv02w"]
+[sub_resource type="LabelSettings" id="LabelSettings_2w5qm"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w1hvx"]
+load_path = "res://.godot/imported/arrow_icon.png-45f68634fdcd06050cfcd7f0714775af.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_o3hvk"]
 font_size = 20
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
@@ -722,7 +730,21 @@ layout_mode = 0
 offset_right = 48.0
 offset_bottom = 28.0
 text = "100"
-label_settings = SubResource("LabelSettings_iv02w")
+label_settings = SubResource("LabelSettings_2w5qm")
+horizontal_alignment = 1
+
+[node name="arrowIcon" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+scale = Vector2(3, 3)
+texture = SubResource("CompressedTexture2D_w1hvx")
+centered = false
+
+[node name="arrowLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+offset_right = 48.0
+offset_bottom = 28.0
+text = "100"
+label_settings = SubResource("LabelSettings_o3hvk")
 horizontal_alignment = 1
 
 [node name="atk_damageIcon" type="Sprite2D" parent="CanvasLayer/Control"]
@@ -831,6 +853,9 @@ one_shot = true
 [node name="PoisonTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ArrowTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="mouse_entered" from="CanvasLayer/Control/UpgradeList/Button0" to="." method="_on_button_0_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/UpgradeList/Button0" to="." method="_on_button_0_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/Control/UpgradeList/Button1" to="." method="_on_button_1_mouse_entered"]
@@ -848,3 +873,4 @@ one_shot = true
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
 [connection signal="timeout" from="VoidTimer" to="." method="_on_void_timer_timeout"]
 [connection signal="timeout" from="PoisonTimer" to="." method="_on_poison_timer_timeout"]
+[connection signal="timeout" from="ArrowTimer" to="." method="_on_arrow_timer_timeout"]
