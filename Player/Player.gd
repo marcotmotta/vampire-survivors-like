@@ -461,7 +461,7 @@ func _process(delta):
 	$CanvasLayer/Control/StatsLabel.text = stats
 
 	# show damage dealt
-	var damage_dealt = ''
+	var damage_dealt = 'Damage Dealt\n'
 	damage_dealt += 'Fireball: ' + str(upgrades.fireball.stats.damage_dealt) + '\n'
 	damage_dealt += 'Thunder: ' + str(upgrades.thunder.stats.damage_dealt) + '\n'
 	damage_dealt += 'Laser: ' + str(upgrades.laser.stats.damage_dealt) + '\n'

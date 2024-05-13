@@ -18,7 +18,7 @@ func _ready():
 		damage *= 2
 		damage += randi_range(0, 2)
 		aoe += 1
-		$CPUParticles2D.color = 'ffbf00'
+		$CPUParticles2D.color = 'd000f9'
 	else:
 		$CPUParticles2D.color = '77ff00'
 

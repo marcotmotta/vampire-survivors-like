@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://fxhymwusb83x"]
+
+[ext_resource type="Script" path="res://Enemies/Boss/BossEnemy.gd" id="1_cj5ev"]
+
+[sub_resource type="Curve" id="Curve_n6xrm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.527472), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j80nx"]
+load_path = "res://.godot/imported/golem.png-11b7c5f8337cc70144c6bbb72d5a404e.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxcnq"]
+size = Vector2(42, 42)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4qnv"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kl4xt"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvi4b"]
+size = Vector2(48, 48)
+
+[node name="BossEnemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_cj5ev")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 20
+lifetime = 0.5
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+gravity = Vector2(0, -200)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_n6xrm")
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(3.2, 3.2)
+texture = SubResource("CompressedTexture2D_j80nx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rxcnq")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_d4qnv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kl4xt")
+value = 50.0
+show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mvi4b")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://p5sgkf8e53l1"]
+[gd_scene load_steps=51 format=3 uid="uid://p5sgkf8e53l1"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_brsg7"]
 [ext_resource type="Script" path="res://Player/EndUI.gd" id="3_0e1w3"]
@@ -109,6 +109,11 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.8, 0, 0.8, 1)
 border_blend = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_wyus2"]
+font_size = 20
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mokqp"]
 content_margin_left = 50.0
@@ -431,13 +436,21 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.705882)
 
-[node name="DamageDealtLabel" type="RichTextLabel" parent="CanvasLayer/Control/PauseUI"]
+[node name="DamageDealtLabel" type="Label" parent="CanvasLayer/Control/PauseUI"]
 layout_mode = 0
-offset_left = 1005.0
-offset_top = 195.0
-offset_right = 1147.0
-offset_bottom = 493.0
-text = "fireball: 100000"
+offset_left = 835.0
+offset_top = 220.0
+offset_right = 1131.0
+offset_bottom = 518.0
+text = "dd
+fireball: 100000
+fireball: 100
+fireball: 100000
+fireball: 100
+fireball: 100000
+fireball: 100"
+label_settings = SubResource("LabelSettings_wyus2")
+horizontal_alignment = 2
 
 [node name="PauseButtons" type="VBoxContainer" parent="CanvasLayer/Control/PauseUI"]
 layout_mode = 1
@@ -741,6 +754,7 @@ centered = false
 
 [node name="arrowLabel" type="Label" parent="CanvasLayer/Control"]
 visible = false
+layout_mode = 0
 offset_right = 48.0
 offset_bottom = 28.0
 text = "100"
