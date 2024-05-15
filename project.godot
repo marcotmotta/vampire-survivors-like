@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="vampire-survivors-like"
+config/description="Vampire Survivors Like"
+config/version="v0.3"
 run/main_scene="res://Menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Weapons/fireball_icon_big.png"
 
 [autoload]
 

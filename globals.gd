@@ -1,7 +1,7 @@
 extends Node
 
 # game version
-var game_version = '0.2'
+var game_version = '0.3'
 
 # player model color
 var colors = [
